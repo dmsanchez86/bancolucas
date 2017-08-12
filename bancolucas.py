@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from telegram.ext import Updater, CommandHandler, ConversationHandler, RegexHandler
 import os
 from bancoDB import DBHelper
