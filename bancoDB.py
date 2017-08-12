@@ -23,6 +23,7 @@ class DBHelper():
         )
         cur = conn.cursor()
         cur.execute("CREATE TABLE IF NOT EXISTS accounts (num_account integer, name_user text, account_balance integer);")
+        cur.execute("CREATE TABLE IF NOT EXISTS commands (num_user integer, command text);")
         return conn
 
 
@@ -72,5 +73,43 @@ class DBHelper():
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 connection.commit()
+        finally:
+            connection.close()
+
+    def user_exists(self, num_user):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM commands WHERE num_user = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_user,))
+                if cursor.fetchone() is None:
+                    return False
+                else:
+                    return True
+        finally:
+            connection.close()
+
+    def add_command(self, num_user, command):
+        connection = self.connect()
+        try:
+            query = "INSERT INTO commands (num_user, command) VALUES (%s, %s)"
+            if self.user_exists(num_user):
+                with connection.cursor() as cursor:
+                    cursor.execute("UPDATE commands SET command=(%s) WHERE num_user= (%s)", (command, num_user,))
+                    connection.commit()
+            else:
+                with connection.cursor() as cursor:
+                    cursor.execute(query, (num_user, command))
+                    connection.commit()
+        finally:
+            connection.close()
+
+    def ultimate_command(self, num_user):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM commands WHERE num_user = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_user,))
+                return cursor.fetchone()
         finally:
             connection.close()
