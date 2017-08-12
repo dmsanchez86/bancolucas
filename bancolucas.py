@@ -12,9 +12,9 @@ OPTIONS = 0
 def create_account(bot, update):
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
-        update.message.reply_text("Ya tienes cuenta")
+        bot.send_message(chat_id=update.message.chat_id, text='Ya tiene cuenta')
     else:
-        update.message.reply_text('Bienvenido. En este momento nuestro equipo crea su cuenta.')
+        bot.send_message(chat_id=update.message.chat_id, text='Bienvenido. En este momento nuestro equipo crea su cuenta.')
         helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0, True)
         date_account = helper.show_account(update.message.chat_id)
         dates = "Su cuenta se creo con éxito, " \
