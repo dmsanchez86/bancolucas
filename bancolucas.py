@@ -9,8 +9,6 @@ import bancoFilter
 
 DELETE = 0
 OPTIONS = 0
-SERVICES = 0
-NUMBER_ACCOUNT = 1
 
 def create_account(bot, update):
     helper = DBHelper()
@@ -82,6 +80,8 @@ def options(bot, update):
 def cancel(bot, update):
     pass
 
+def services(bot, update):
+    pass
 
 def main():
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
