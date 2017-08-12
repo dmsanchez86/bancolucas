@@ -92,24 +92,31 @@ class DBHelper():
     def add_command(self, num_user, command):
         connection = self.connect()
         try:
-            query = "INSERT INTO commands (num_user, command) VALUES (%s, %s);"
-            if self.user_exists(num_user):
-                query_delete = "DELETE FROM commands WHERE num_user = %s"
+
+            if self.user_exists(num_user) == False:
+                query_insert = "INSERT INTO commands (num_user, command) VALUES (%s, %s);"
                 with connection.cursor() as cursor:
-                    cursor.execute(query_delete, (num_user,))
+                    cursor.execute(query_insert, (num_user, command,))
+                    cursor.close()
                     connection.commit()
-                    cursor.execute(query, (num_user, command, ))
+
+            else:
+                query_update = 'UPDATE commands SET command = %s WHERE num_user = %s'
+                with connection.cursor() as cursor:
+                    cursor.execute(query_update, (command, num_user,))
+                    cursor.close()
                     connection.commit()
         finally:
             connection.close()
 
 
-    def ultimate_command(self, num_user):
-        connection = self.connect()
-        try:
-            query = "SELECT * FROM commands WHERE num_user = %s"
-            with connection.cursor() as cursor:
-                cursor.execute(query, (num_user,))
-                return cursor.fetchone()
-        finally:
-            connection.close()
+
+    # def ultimate_command(self, num_user):
+    #     connection = self.connect()
+    #     try:
+    #         query = "SELECT * FROM commands WHERE num_user = %s"
+    #         with connection.cursor() as cursor:
+    #             cursor.execute(query, (num_user,))
+    #             return cursor.fetchone()
+    #     finally:
+    #         connection.close()
