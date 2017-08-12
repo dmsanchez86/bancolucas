@@ -19,9 +19,17 @@ def cancel(bot, update):
     pass
 
 def add_balance(bot, update):
-    helper = DBHelper()
-    update.message.text("¿cuanto quieres agregar?")
+    update.message.reply_text(chat_id=update.message.chat_id, text="¿Cuanto quieres agregar?")
     return ADD_BALANCE
+
+
+def add_balance_logic(bot, update):
+    helper = DBHelper()
+    balance = helper.show_account(update.message.chat_id)[2] + update.message.text
+    helper.add_balance(balance, update.message.chat_id)
+    update.message.reply_text("Tu saldo es de {}".format(helper.show_account(update.message.chat_id)[2]))
+    return ConversationHandler.END
+
 
 services_handler = ConversationHandler(
     entry_points=[MessageHandler(bancoFilter.filter_service, services)],

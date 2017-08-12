@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import telegram.ext
 
 class FilterServices(telegram.ext.BaseFilter):
