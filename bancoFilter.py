@@ -29,4 +29,4 @@ class FilterTransfer(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == 'Tansferencia'
 
-filter_transfer = FilterTransfer
+filter_transfer = FilterTransfer()
