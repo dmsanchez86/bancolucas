@@ -57,7 +57,7 @@ class DBHelper():
     def show_account(self, num_account):
         connection = self.connect()
         try:
-            query = "SELECT * FROM account WHERE num_account = %s"
+            query = "SELECT * FROM accounts WHERE num_account = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 return cursor.fetchone()
