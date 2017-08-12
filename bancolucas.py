@@ -39,20 +39,11 @@ def sure_delete_account(bot, update):
 
 def delete_account(bot, update):
     helper = DBHelper()
-    if update.message.text == 'Si' and helper.account_exists(update.message.chat_id):
-        if not helper.account_exists(update.message.chat_id):
-            helper.delete_account(update.message.chat_id)
-            update.message.chat_id("Su cuenta ha sido eliminada.")
-            return ConversationHandler.END
-        else:
-            update.message.chat_id("Ups, ocurrio un problema '/delete' para volver a intentarlo.")
-            return ConversationHandler.END
-    elif not helper.account_exists(update.message.chat_id):
-        update.message.reply_text("Usted no tiene aun una cuenta, nuestro equipo lo invita a unirse. Solo debe digitar '/start'")
-        return ConversationHandler.END
+    if helper.account_exists(update.message.chat_id):
+        helper.delete_account(update.message.chat_id)
+        bot.message.reply_text("Su cuenta ha sido eliminada.")
     else:
-        update.message.reply_text("Gracias por seguir con nosotros")
-        return ConversationHandler.END
+        bot.message.reply_text("Usted no tiene cuenta.")
 
 
 def cancel(bot, update):
@@ -68,7 +59,7 @@ def main():
         entry_points=[CommandHandler('delete', sure_delete_account)],
 
         states={
-            DELETE: [RegexHandler('^(Si|No)$', delete_account)]
+            DELETE: [RegexHandler('^(Si)$', delete_account)]
         },
 
         fallbacks=[CommandHandler('cancel', cancel)]
