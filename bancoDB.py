@@ -88,7 +88,7 @@ class DBHelper():
     def add_balance(self, deposit, num_account)
         connection = self.connect()
         try:
-            query "UPDATE accounts SET account_balance = account_balance + %s WHERE num_account = %s"
+            query = "UPDATE accounts SET account_balance = account_balance + %s WHERE num_account = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 connection.commit()
@@ -98,7 +98,7 @@ class DBHelper():
     def withdraw(self, amount, num_account)
         connection = self.connect()
         try:
-            query "UPDATE accounts SET account_balance = account_balance - %s WHERE num_account = %s"
+            query = "UPDATE accounts SET account_balance = account_balance - %s WHERE num_account = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 connection.commit()
