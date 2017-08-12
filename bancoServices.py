@@ -26,7 +26,10 @@ def add_balance(bot, update):
 
 
 def add_balance_logic(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="hi")
+    helper = DBHelper()
+    sum = helper.show_account(update.message.chat_id)[2] + update.message.text
+    helper.add_balance(sum, update.message.chat_id)
+    update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
 
 
 add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_add_balance, add_balance)],
