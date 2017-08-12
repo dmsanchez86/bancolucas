@@ -5,7 +5,8 @@ from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 import bancoFilter
 
-DELETE, OPTIONS= range(1)
+DELETE = 0
+OPTIONS = 0
 
 
 def start(bot, update):
