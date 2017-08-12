@@ -11,7 +11,7 @@ def main():
     dispatcher = updater.dispatcher
     conv_handler = telegram.ext.ConversationHandler(
         entry_points=[CommandHandler('start', start)],
-        fallbacks=[CommandHandler('cancel', cancel)]
+        # fallbacks=[CommandHandler('cancel', cancel)]
     )
     dispatcher.add_handler(conv_handler)
 
