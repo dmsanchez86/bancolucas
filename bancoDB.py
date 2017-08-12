@@ -23,7 +23,6 @@ class DBHelper():
         )
         cur = conn.cursor()
         cur.execute("CREATE TABLE IF NOT EXISTS accounts (num_account integer, name_user text, account_balance integer);")
-        cur.execute("CREATE TABLE IF NOT EXISTS commands (num_user integer, command text);")
         return conn
 
 
@@ -73,49 +72,5 @@ class DBHelper():
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 connection.commit()
-        finally:
-            connection.close()
-
-    def user_exists_command(self, num_user):
-        connection = self.connect()
-        try:
-            query = "SELECT * FROM commands WHERE num_user = %s"
-            with connection.cursor() as cursor:
-                cursor.execute(query, (num_user,))
-                if cursor.fetchone() is None:
-                    return False
-                else:
-                    return True
-        finally:
-            connection.close()
-
-    def add_command(self, num_user, command):
-        connection = self.connect()
-        try:
-            if not self.user_exists_command(num_user):
-                query_insert = "INSERT INTO commands (num_user, command) VALUES (%s, %s);"
-                with connection.cursor() as cursor:
-                    cursor.execute(query_insert, (num_user, command,))
-                    cursor.close()
-                    connection.commit()
-
-            else:
-                query_update = 'UPDATE commands SET command = %s WHERE num_user = %s'
-                with connection.cursor() as cursor:
-                    cursor.execute(query_update, (command, num_user,))
-                    cursor.close()
-                    connection.commit()
-        finally:
-            connection.close()
-
-
-
-    def ultimate_command(self, num_user):
-        connection = self.connect()
-        try:
-            query = "SELECT * FROM commands WHERE num_user = %s"
-            with connection.cursor() as cursor:
-                cursor.execute(query, (num_user,))
-                return cursor.fetchone()
         finally:
             connection.close()

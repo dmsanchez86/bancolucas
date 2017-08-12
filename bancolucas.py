@@ -25,8 +25,6 @@ def show_account(bot, update):
 
 
 def sure_delete_account(bot, update):
-    helper = DBHelper()
-    helper.add_command(update.message.chat_id, update.message.text)
     reply_keyboard = [["Si"], ["No"]]
     update.message.reply_text("Seguro de eliminar su cuenta",
     reply_markup=ReplyKeyboardMarkup(reply_keyboard))
@@ -35,8 +33,10 @@ def sure_delete_account(bot, update):
 
 def delete_account(bot, update):
     helper = DBHelper()
-    if update.message.text == 'Si':
+    if update.message.text == 'Si' and helper.account_exists(update.message.chat_id):
         helper.delete_account(update.message.chat_id)
+    elif not helper.account_exists(update.message.chat_id):
+        update.message.reply_text("Usted no tiene aun una cuenta, nuestro equipo lo invita a unirse. Solo debe digitar '/start'")
     else:
         update.message.reply_text("Gracias por seguir con nosotros")
     return ConversationHandler.END
