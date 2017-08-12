@@ -94,15 +94,15 @@ class DBHelper():
         try:
             query = "INSERT INTO commands (num_user, command) VALUES (%s, %s);"
             if self.user_exists(num_user):
+                query_delete = "DELETE FROM commands WHERE num_user = %s"
                 with connection.cursor() as cursor:
-                    cursor.execute("UPDATE commands SET command=(%s) WHERE num_user= (%s);", (command, num_user,))
+                    cursor.execute(query_delete, (num_user,))
                     connection.commit()
-            else:
-                with connection.cursor() as cursor:
-                    cursor.execute(query, (num_user, command))
+                    cursor.execute(query, (num_user, command, ))
                     connection.commit()
         finally:
             connection.close()
+
 
     def ultimate_command(self, num_user):
         connection = self.connect()
