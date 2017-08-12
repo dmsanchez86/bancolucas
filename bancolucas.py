@@ -33,7 +33,7 @@ def show_account(bot, update):
 def sure_delete_account(bot, update):
     reply_keyboard = [["Si"], ["No"]]
     update.message.reply_text("¿Seguro de eliminar su cuenta?",
-    reply_markup=ReplyKeyboardMarkup(reply_keyboard))
+    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return DELETE
 
 
