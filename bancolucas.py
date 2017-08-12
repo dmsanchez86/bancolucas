@@ -21,7 +21,7 @@ def start(bot, update):
 def sure_delete_account(bot, update):
     reply_keyboard = [['Si', 'No']]
     update.message.reply_text("¿Seguro que deseas eliminar tu cuenta?",
-                              reply_markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+                              reply_markup = ReplyKeyboardMarkup(reply_keyboard))
     return DELETE
 
 # logic for delete account
