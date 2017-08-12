@@ -3,8 +3,7 @@ from telegram.ext import Updater, CommandHandler, ConversationHandler, RegexHand
 import os
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
-import bancoFilter
-
+import bancoFilter, bancoServices
 
 
 DELETE = 0
@@ -80,9 +79,6 @@ def options(bot, update):
 def cancel(bot, update):
     pass
 
-def services(bot, update):
-    pass
-
 def main():
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
     updater = Updater(token=TOKEN)
@@ -91,7 +87,7 @@ def main():
     options_handler = ConversationHandler(
         entry_points=[CommandHandler('opciones', options), CommandHandler('start', options)],
         states={
-            OPTIONS: [MessageHandler(bancoFilter.filter_service, services),
+            OPTIONS: [MessageHandler(bancoFilter.filter_service, bancoServices.services),
                       MessageHandler(bancoFilter.filter_new_account, create_account),
                       MessageHandler(bancoFilter.filter_desactivate_account, desactivate_account),
                       MessageHandler(bancoFilter.filter_activate_account, active_account)]

@@ -23,3 +23,10 @@ class FilterActivateAccount(telegram.ext.BaseFilter):
         return message.text == 'Activar cuenta'
 
 filter_activate_account = FilterActivateAccount()
+
+
+class FilterTransfer(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == 'Tansferencia'
+
+filter_transfer = FilterTransfer
