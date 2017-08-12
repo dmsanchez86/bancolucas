@@ -30,7 +30,7 @@ class DBHelper():
     def create_account(self, num_account, name_user, account_balance):
         connection = self.connect()
         try:
-            query = "INSERT INTO tasks (num_account, name_user, account_balance) VALUES (%s, %s, %s);"
+            query = "INSERT INTO accounts (num_account, name_user, account_balance) VALUES (%s, %s, %s);"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account, name_user, account_balance,))
                 connection.commit()
