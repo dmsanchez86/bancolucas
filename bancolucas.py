@@ -8,11 +8,6 @@ import bancoFilter
 DELETE = 0
 OPTIONS = 0
 
-
-def start(bot, update):
-
-
-
 def create_account(bot, update):
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
