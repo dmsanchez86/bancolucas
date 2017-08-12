@@ -45,7 +45,10 @@ class DBHelper():
             query = "SELECT * FROM accounts WHERE num_account = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
-                return cursor.fetchone() is not None
+                if cursor.fetchone() is None:
+                    return False
+                else:
+                    return True
         finally:
             connection.close()
 

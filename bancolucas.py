@@ -9,7 +9,7 @@ def start(bot, update):
         date_account = helper.show_account(update.message.chat_id)
         update.message.reply_text(date_account)
     else:
-        helper.create_account(update.message.chat_id, "{} {}".format(update.message.from_user.first_name, update.message.from_user.second_name), 0)
+        helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0)
         date_account = helper.show_account(update.message.chat_id)
         update.message.reply_text(date_account)
 
