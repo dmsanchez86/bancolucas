@@ -22,16 +22,13 @@ def add_balance(bot, update):
     update.message.reply_text("¿Cuanto vas a añadir?")
     return ADD_BALANCE
 
-def add_balance_logic(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="hi")
+# def add_balance_logic(bot, update):
+#     bot.send_message(chat_id=update.message.chat_id, text="hi")
 
-service_handler = ConversationHandler(
+options_handler = ConversationHandler(
     entry_points=[MessageHandler(bancoFilter.filter_service, services)],
-
     states={
-        OPERATIONS:[MessageHandler(bancoFilter.filter_transfer, transfer), MessageHandler(bancoFilter.filter_add_balance, add_balance)],
-        ADD_BALANCE:[MessageHandler(bancoFilter.filter_number, add_balance_logic)]
+        OPERATIONS:[MessageHandler(bancoFilter.filter_add_balance, add_balance),]
     },
-
     fallbacks=[CommandHandler('cancel', cancel)]
 )
