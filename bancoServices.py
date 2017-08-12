@@ -25,7 +25,7 @@ def add_balance(bot, update):
 # def add_balance_logic(bot, update):
 #     bot.send_message(chat_id=update.message.chat_id, text="hi")
 
-options_handler = ConversationHandler(
+service_handler = ConversationHandler(
     entry_points=[MessageHandler(bancoFilter.filter_service, services)],
     states={
         OPERATIONS:[MessageHandler(bancoFilter.filter_add_balance, add_balance),]
