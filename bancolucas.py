@@ -1,6 +1,5 @@
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
 import os
-import todoDB
 import telegram
 import todoFilter
 
