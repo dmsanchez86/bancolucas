@@ -24,14 +24,9 @@ class FilterActivateAccount(telegram.ext.BaseFilter):
 
 filter_activate_account = FilterActivateAccount()
 
-class FilterExchangeCash(telegram.ext.BaseFilter):
+
+class FilterTransfer(telegram.ext.BaseFilter):
     def filter(self, message):
-        return message.text == 'Transferencias'
+        return message.text == 'Tansferencia'
 
-filter_exchange_cash = FilterExchangeCash()
-
-class FilterNumberAccount(telegram.ext.BaseFilter):
-    def filter(self, message):
-        return message.text.isdigit()
-
-filter_num_account = FilterNumberAccount()
+filter_transfer = FilterTransfer

@@ -3,14 +3,11 @@ from telegram.ext import Updater, CommandHandler, ConversationHandler, RegexHand
 import os
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
-import bancoFilter
-
+import bancoFilter, bancoServices
 
 
 DELETE = 0
 OPTIONS = 0
-SERVICES = 0
-NUMBER_ACCOUNT = 1
 
 def create_account(bot, update):
     helper = DBHelper()
@@ -82,44 +79,15 @@ def options(bot, update):
 def cancel(bot, update):
     pass
 
-
-
-# bancoServices
-
-def services(bot, update):
-    reply_keyboard = [["Tansferencias"]]
-    update.message.reply_text("Nuestros servicios: ",
-                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
-    return OPTIONS
-
-def exchange_cash(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="Escriba el numero de la cuenta a la cual va a transferir el dinero: ")
-    return NUMBER_ACCOUNT
-
-def transfer(bot, update):
-    update.message.reply_text("Va a tansferir")
-
 def main():
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
 
-
-    services_handler = ConversationHandler(
-        entry_points=[CommandHandler('servicios', services)],
-        states={
-            OPTIONS:[MessageHandler(bancoFilter.filter_exchange_cash, exchange_cash)],
-            NUMBER_ACCOUNT:[MessageHandler(bancoFilter.filter_num_account, transfer)]
-        },
-        fallbacks=[CommandHandler('cancel', cancel)]
-    )
-
-    dispatcher.add_handler(services_handler)
-
     options_handler = ConversationHandler(
         entry_points=[CommandHandler('opciones', options), CommandHandler('start', options)],
         states={
-            OPTIONS: [MessageHandler(bancoFilter.filter_service, services),
+            OPTIONS: [MessageHandler(bancoFilter.filter_service, bancoServices.services),
                       MessageHandler(bancoFilter.filter_new_account, create_account),
                       MessageHandler(bancoFilter.filter_desactivate_account, desactivate_account),
                       MessageHandler(bancoFilter.filter_activate_account, active_account)]
