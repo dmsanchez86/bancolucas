@@ -42,8 +42,10 @@ def delete_account(bot, update):
     if helper.account_exists(update.message.chat_id):
         helper.delete_account(update.message.chat_id)
         bot.message.reply_text("Su cuenta ha sido eliminada.")
+        return ConversationHandler.END
     else:
         bot.message.reply_text("Usted no tiene cuenta.")
+        return ConversationHandler.END
 
 
 def cancel(bot, update):
