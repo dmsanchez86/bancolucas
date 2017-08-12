@@ -16,8 +16,8 @@
       <file leaf-file-name="bancolucas.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bancolucas.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="80" column="32" lean-forward="true" selection-start-line="80" selection-start-column="32" selection-end-line="80" selection-end-column="32" />
+            <state relative-caret-position="199">
+              <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
               <folding>
                 <element signature="e#24#107#0" expanded="true" />
               </folding>
@@ -327,8 +327,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bancolucas.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="80" column="32" lean-forward="true" selection-start-line="80" selection-start-column="32" selection-end-line="80" selection-end-column="32" />
+        <state relative-caret-position="199">
+          <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
           <folding>
             <element signature="e#24#107#0" expanded="true" />
           </folding>
