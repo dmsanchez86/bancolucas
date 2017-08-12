@@ -17,18 +17,20 @@ def start(bot, update):
 
 
 def delete_account(bot, update):
-
     reply_keyboard = [['Si', 'No']]
     update.message.reply_text("¿Seguro que deseas eliminar tu cuenta?",
                               reply_markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
 
-    # if reply_markup == 'Si':
-    #     helper = DBHelper()
-    #     helper.delete_account(update.message.chat_id)
-    #     if helper.account_exists(update.message.chat_id):
-    #         update.message.reply_text("Upss Parece que tenemos un problema. Intenta de nuevo mas tarde.")
-    #     else:
-    #         update.message.reply_text("Cuenta eliminada!")
+    reply_markup = ReplyKeyboardMarkup(reply_keyboard)
+    if reply_markup == 'Si':
+        helper = DBHelper()
+        helper.delete_account(update.message.chat_id)
+        if helper.account_exists(update.message.chat_id):
+            update.message.reply_text("Upss Parece que tenemos un problema. Intenta de nuevo mas tarde.")
+        else:
+            update.message.reply_text("Cuenta eliminada!")
+    else:
+        return DO
 
 
 
