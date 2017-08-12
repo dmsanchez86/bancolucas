@@ -1,9 +1,15 @@
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
 import os
-import telegram
+from bancoDB import DBHelper
 
 def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
+    helper = DBHelper()
+    if helper.account_exists(update.message.chat_id):
+        pass
+    else:
+        update.message.reply_text('creando cuenta...')
+
 
 def cancel(bot, update):
     pass
