@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from telegram.ext import Updater, CommandHandler, ConversationHandler, RegexHandler, Filters
+from telegram.ext import Updater, CommandHandler, ConversationHandler, RegexHandler, MessageHandler
 import os
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
@@ -80,7 +80,7 @@ def main():
     options_handler = ConversationHandler(
         entry_points=[CommandHandler('opciones', options)],
         states={
-            OPTIONS: [Filters.text(bancoFilter.filter_service, services)]
+            OPTIONS: [MessageHandler(bancoFilter.filter_service, services)]
         },
         fallbacks=[CommandHandler('cancel', cancel)]
     )
