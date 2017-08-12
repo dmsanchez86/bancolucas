@@ -10,18 +10,22 @@ OPTIONS = 0
 
 
 def start(bot, update):
+
+
+
+def create_account(bot, update):
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
         update.message.reply_text("Ya tienes cuenta")
     else:
         update.message.reply_text('Bienvenido. En este momento nuestro equipo crea su cuenta.')
-        helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0, True)
-        date_account = helper.show_account(update.message.chat_id)
-        dates = "Su cuenta se creo con éxito, " \
-                "los datos son:" \
-                "\nNumero de Cuenta: {} \nNombre del Cliente: {} " \
-                "\nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
-        update.message.reply_text(dates)
+    helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0, True)
+    date_account = helper.show_account(update.message.chat_id)
+    dates = "Su cuenta se creo con éxito, " \
+            "los datos son:" \
+            "\nNumero de Cuenta: {} \nNombre del Cliente: {} " \
+            "\nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
+    update.message.reply_text(dates)
 
 
 def show_account(bot, update):
@@ -40,7 +44,8 @@ def show_account(bot, update):
 
 def sure_desactivate_account(bot, update):
     reply_keyboard = [["Si"], ["No"]]
-    update.message.reply_text("¿Seguro de que desea desactivar su cuenta?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+    update.message.reply_text("¿Seguro de que desea desactivar su cuenta?",
+                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return DELETE
 
 
@@ -81,9 +86,9 @@ def main():
     dispatcher = updater.dispatcher
 
     options_handler = ConversationHandler(
-        entry_points=[CommandHandler('opciones', options)],
+        entry_points=[CommandHandler('opciones', options), CommandHandler('start', options)],
         states={
-            OPTIONS: [MessageHandler(bancoFilter.filter_service, services), MessageHandler(bancoFilter.filter_new_account, start)]
+            OPTIONS: [MessageHandler(bancoFilter.filter_service, services), MessageHandler(bancoFilter.filter_new_account, create_account)]
         },
         fallbacks=[CommandHandler('cancel', cancel)]
     )
