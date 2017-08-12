@@ -23,7 +23,7 @@ def add_balance(bot, update):
     return ADD_BALANCE
 
 def add_balance_logic(bot, update):
-    update.message.reply_text("Hi")
+    bot.send_message(chat_id=update.message.chat_id, text="hi")
 
 service_handler = ConversationHandler(
     entry_points=[MessageHandler(bancoFilter.filter_service, services)],
