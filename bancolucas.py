@@ -4,7 +4,7 @@ import os
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 import bancoFilter
-import bancoServices
+
 
 
 DELETE = 0
@@ -82,6 +82,21 @@ def options(bot, update):
 def cancel(bot, update):
     pass
 
+
+
+# bancoServices
+
+def services(bot, update):
+    bot.send_message(chat_id=update.message.chat_id, text="Nuestros servicios:")
+    return ConversationHandler.END
+
+def exchange_cash(bot, update):
+    bot.send_message(chat_id=update.message.chat_id, text="Escriba el numero de la cuenta a la cual va a transferir el dinero: ")
+    return NUMBER_ACCOUNT
+
+def transfer(bot, update):
+    update.message.reply_text("Va a tansferir")
+
 def main():
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
     updater = Updater(token=TOKEN)
@@ -89,10 +104,10 @@ def main():
 
 
     services_handler = ConversationHandler(
-        entry_points=[CommandHandler('servicios', bancoServices.services)],
+        entry_points=[CommandHandler('servicios', services)],
         states={
-            OPTIONS:[MessageHandler(bancoFilter.filter_exchange_cash, bancoServices.exchange_cash)],
-            NUMBER_ACCOUNT:[MessageHandler(bancoFilter.filter_num_account), ]
+            OPTIONS:[MessageHandler(bancoFilter.filter_exchange_cash, exchange_cash)],
+            NUMBER_ACCOUNT:[MessageHandler(bancoFilter.filter_num_account, transfer)]
         },
         fallbacks=[CommandHandler('cancel', cancel)]
     )
@@ -102,7 +117,7 @@ def main():
     options_handler = ConversationHandler(
         entry_points=[CommandHandler('opciones', options), CommandHandler('start', options)],
         states={
-            OPTIONS: [MessageHandler(bancoFilter.filter_service, bancoServices.services),
+            OPTIONS: [MessageHandler(bancoFilter.filter_service, services),
                       MessageHandler(bancoFilter.filter_new_account, create_account),
                       MessageHandler(bancoFilter.filter_desactivate_account, desactivate_account),
                       MessageHandler(bancoFilter.filter_activate_account, active_account)]
