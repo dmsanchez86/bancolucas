@@ -1,7 +1,6 @@
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
 import os
 import telegram
-import todoFilter
 
 def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
