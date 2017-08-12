@@ -30,3 +30,15 @@ class FilterTransfer(telegram.ext.BaseFilter):
         return message.text == 'Tansferencia'
 
 filter_transfer = FilterTransfer()
+
+class FilterNumber(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text.isdigit()
+
+filter_number = FilterNumber()
+
+class FilterAddBalance(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Añadir fondos"
+
+filter_add_balance = FilterAddBalance()
