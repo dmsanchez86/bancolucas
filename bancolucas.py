@@ -39,7 +39,7 @@ def show_account(bot, update):
 
 def sure_desactivate_account(bot, update):
     reply_keyboard = [["Si"], ["No"]]
-    update.message.reply_text("¿Seguro de eliminar su cuenta?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+    update.message.reply_text("¿Seguro de que desea desactivar su cuenta?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return DELETE
 
 
@@ -53,6 +53,10 @@ def desactivate_account(bot, update):
 def cancel(bot, update):
     pass
 
+def active_account(bot, update):
+    helper = DBHelper()
+    helper.activate_account(update.message.chat_id)
+    bot.send_message(chat_id=update.message.chat_id, text="Cuenta activada.")
 
 def main():
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
