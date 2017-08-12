@@ -1,7 +1,6 @@
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, ConversationHandler, RegexHandler
 import os
 from bancoDB import DBHelper
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 
 
 def start(bot, update):
@@ -14,11 +13,6 @@ def start(bot, update):
                               "{} {}".format(update.message.from_user.first_name, update.message.from_user.second_name), 0)
         date_account = helper.show_account(update.message.chat_id)
         update.message.reply_text(date_account)
-
-def show_account(bot, update):
-    helper = DBHelper()
-    date_account = helper.show_account(update.message.chat_id)
-    update.message.reply_text(date_account)
 
 
 def what_to_do(bot, update):
@@ -36,10 +30,6 @@ def main():
 
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
-
-
-    show_handler = CommandHandler('show', show_account)
-    dispatcher.add_handler(show_handler)
 
     # config webhook Heroku
     PORT = int(os.environ.get('PORT', '5000'))
