@@ -11,3 +11,9 @@ class FilterNewAccount(telegram.ext.BaseFilter):
         return message.text == 'Crear cuenta'
 
 filter_new_account = FilterNewAccount()
+
+class FilterDesactivateAccount(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == 'Desactivar cuenta'
+
+filter_desactivate_account = FilterDesactivateAccount()

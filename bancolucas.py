@@ -87,7 +87,8 @@ def main():
         entry_points=[CommandHandler('opciones', options), CommandHandler('start', options)],
         states={
             OPTIONS: [MessageHandler(bancoFilter.filter_service, services),
-                      MessageHandler(bancoFilter.filter_new_account, create_account)]
+                      MessageHandler(bancoFilter.filter_new_account, create_account),
+                      MessageHandler(bancoFilter.filter_desactivate_account, desactivate_account)]
         },
         fallbacks=[CommandHandler('cancel', cancel)]
     )
