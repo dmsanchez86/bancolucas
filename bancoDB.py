@@ -124,7 +124,29 @@ class DBHelper():
         try:
             query = "INSERT INTO transfers (id, num_account_sender, num_account_receive, account_balance, date, state) VALUES (%s, %s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
-                cursor.execute(query, (num_account, name_user, account_balance, state,))
+                cursor.execute(query, (num_account_sender, num_account_receive, account_balance, date, state,))
+                connection.commit()
+        finally:
+            connection.close()
+
+    # get transfers sends by num account
+    def get_transfers_sends(self, num_account):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM transfers WHERE num_account_sender = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account,))
+                connection.commit()
+        finally:
+            connection.close()
+
+    # get transfers receives by num account
+    def get_transfers_receive(self, num_account):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM transfers WHERE num_account_receive = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account,))
                 connection.commit()
         finally:
             connection.close()
