@@ -6,7 +6,8 @@ def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
-        update.message.reply_text('hii')
+        date_account = helper.show_account(update.message.chat_id)
+        update.message.reply_text(date_account)
     else:
         helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0)
         date_account = helper.show_account(update.message.chat_id)

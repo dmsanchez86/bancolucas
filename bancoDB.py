@@ -33,7 +33,6 @@ class DBHelper():
             query = "INSERT INTO accounts (num_account, name_user, account_balance) VALUES (%s, %s, %s);"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account, name_user, account_balance,))
-                cursor.close()
                 connection.commit()
         finally:
             connection.close()
