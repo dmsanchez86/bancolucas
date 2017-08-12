@@ -76,12 +76,12 @@ class DBHelper():
         finally:
             connection.close()
 
-    def user_exists_command(self, num_account):
+    def user_exists_command(self, num_user):
         connection = self.connect()
         try:
-            query = "SELECT * FROM commands WHERE num_account = %s"
+            query = "SELECT * FROM commands WHERE num_user = %s"
             with connection.cursor() as cursor:
-                cursor.execute(query, (num_account,))
+                cursor.execute(query, (num_user,))
                 if cursor.fetchone() is None:
                     return False
                 else:
