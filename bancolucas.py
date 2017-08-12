@@ -32,13 +32,15 @@ def show_account(bot, update):
 
 def sure_delete_account(bot, update):
     reply_keyboard = [["Si"], ["No"]]
-    update.message.reply_text("Seguro de eliminar su cuenta",
+    update.message.reply_text("¿Seguro de eliminar su cuenta?",
     reply_markup=ReplyKeyboardMarkup(reply_keyboard))
     return DELETE
 
 
 def delete_account(bot, update):
     helper = DBHelper()
+
+
     if update.message.text == 'Si' and helper.account_exists(update.message.chat_id):
         if not helper.account_exists(update.message.chat_id):
             update.message.chat_id("Su cuenta ha sido eliminada.")
