@@ -10,4 +10,4 @@ class FilterNewAccount(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == 'Crear cuenta'
 
-filter_new_account = FilterServices()
+filter_new_account = FilterNewAccount()
