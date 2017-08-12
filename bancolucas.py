@@ -40,7 +40,6 @@ def sure_delete_account(bot, update):
 def delete_account(bot, update):
     helper = DBHelper()
     if update.message.text == 'Si' and helper.account_exists(update.message.chat_id):
-        helper.delete_account(update.message.chat_id)
         if not helper.account_exists(update.message.chat_id):
             update.message.chat_id("Su cuenta ha sido eliminada.")
             return ConversationHandler.END
