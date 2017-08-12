@@ -1,9 +1,10 @@
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, ConversationHandler, RegexHandler
+from telegram.ext import Updater, CommandHandler, ConversationHandler, RegexHandler
 import os
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 
 DELETE = 0
+
 
 def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
@@ -31,6 +32,7 @@ def sure_delete_account(bot, update):
     reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return DELETE
 
+
 def delete_account(bot, update):
     helper = DBHelper()
     if helper.ultimate_command(update.message.chat_id)[1] == '/delete' and update.message.text == 'Si':
@@ -41,13 +43,17 @@ def delete_account(bot, update):
         update.message.reply_text("Que haces aca")
 
 
+def cancel(bot, update):
+    pass
+
+
 def main():
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
 
     delete_handler = ConversationHandler(entry_points=[CommandHandler('delete', sure_delete_account)],
-                                         states={DELETE: [RegexHandler('^(Si|No)$', delete_account)]})
+                                         states={DELETE: [RegexHandler('^(Si|No)$', delete_account)]}, fallbacks=[CommandHandler('cancel', cancel)])
 
     dispatcher.add_handler(delete_handler)
     start_handler = CommandHandler('start', start)
