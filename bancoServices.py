@@ -5,12 +5,12 @@ from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 import bancoFilter
 
-TRANSFER = 0
+OPERATIONS = 0
 ADD_BALANCE = 1
 def services(bot, update):
     reply_keyboard = [["Tansferencias"], ["Add fondos"]]
     update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
-    return TRANSFER
+    return OPERATIONS
 
 def transfer(bot, update):
     pass
@@ -19,25 +19,19 @@ def cancel(bot, update):
     pass
 
 def add_balance(bot, update):
-    update.message.reply_text("sssss")
+    update.message.reply_text("¿Cuanto vas a añadir?")
+    return ADD_BALANCE
 
+def add_balance_logic(bot, update):
+    update.message.reply_text("Hi")
 
-#def add_balance_logic(bot, update):
-    # helper = DBHelper()
-    # balance = helper.show_account(update.message.chat_id)[2] + update.message.text
-    # helper.add_balance(balance, update.message.chat_id)
-    # update.message.reply_text("Tu saldo es de {}".format(helper.show_account(update.message.chat_id)[2]))
-    # return ConversationHandler.END
-
-
-services_handler = ConversationHandler(
+service_handler = ConversationHandler(
     entry_points=[MessageHandler(bancoFilter.filter_service, services)],
+
     states={
-        TRANSFER:[MessageHandler(bancoFilter.filter_transfer, transfer)],
-        ADD_BALANCE:[MessageHandler(bancoFilter.filter_add_balance, add_balance)]
+        OPERATIONS:[MessageHandler(bancoFilter.filter_transfer, transfer), MessageHandler(bancoFilter.filter_add_balance, add_balance)],
+        ADD_BALANCE:[MessageHandler(bancoFilter.filter_number, add_balance_logic)]
     },
+
     fallbacks=[CommandHandler('cancel', cancel)]
 )
-
-
-
