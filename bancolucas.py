@@ -29,8 +29,8 @@ def main():
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
 
-    start_handler = CommandHandler('vercuenta', show_account)
-    dispatcher.add_handler(start_handler)
+    show_handler = CommandHandler('vercuenta', show_account)
+    dispatcher.add_handler(show_handler)
 
     PORT = int(os.environ.get('PORT', '5000'))
     updater.start_webhook(listen="0.0.0.0",
