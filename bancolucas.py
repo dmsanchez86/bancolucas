@@ -16,7 +16,7 @@ def start(bot, update):
 def show_account(bot, update):
     helper = DBHelper()
     date_account = helper.show_account(update.message.chat_id)
-    dates = "Numero de Cuenta: " + date_account[0] + "\n" + "Nombre Cliente: " + date_account[1] + "\n" + "Saldo en Cuenta: " + date_account[2]
+    dates = "Numero de Cuenta: {} \n Nombre del Cliente: {} \n Saldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
     update.message.reply_text(dates)
 
 
