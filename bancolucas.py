@@ -6,7 +6,7 @@ def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
-        pass
+        update.message.reply_text('hii')
     else:
         update.message.reply_text('creando cuenta...')
 
