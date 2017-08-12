@@ -57,6 +57,7 @@ def active_account(bot, update):
     helper = DBHelper()
     helper.activate_account(update.message.chat_id)
     bot.send_message(chat_id=update.message.chat_id, text="Cuenta activada.")
+    return ConversationHandler.END
 
 
 def options(bot, update):
