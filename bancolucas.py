@@ -10,7 +10,6 @@ OPTIONS = 0
 
 
 def start(bot, update):
-
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
         update.message.reply_text("Ya tienes cuenta")
@@ -63,6 +62,10 @@ def options(bot, update):
         reply_keyboard = [["Ver nuestros servicios"], ["Desactivar cuenta"]]
         update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
         return OPTIONS
+    elif not helper.account_exists(update.message.chat_id):
+        reply_keyboard = [["Crear cuenta"], ["Ver nuestros servicios"]]
+        update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+        return OPTIONS
 
 def services(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="Nuestros servicios:")
@@ -80,7 +83,7 @@ def main():
     options_handler = ConversationHandler(
         entry_points=[CommandHandler('opciones', options)],
         states={
-            OPTIONS: [MessageHandler(bancoFilter.filter_service, services)]
+            OPTIONS: [MessageHandler(bancoFilter.filter_service, services), MessageHandler(bancoFilter.filter_new_account, start)]
         },
         fallbacks=[CommandHandler('cancel', cancel)]
     )
@@ -101,9 +104,6 @@ def main():
 
     active_handler = CommandHandler('activar', active_account)
     dispatcher.add_handler(active_handler)
-
-    start_handler = CommandHandler('start', start)
-    dispatcher.add_handler(start_handler)
 
     show_handler = CommandHandler('vercuenta', show_account)
     dispatcher.add_handler(show_handler)
