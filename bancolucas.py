@@ -27,7 +27,7 @@ def sure_delete_account(bot, update):
     helper = DBHelper()
     helper.add_command(update.message.chat_id, update.message.text)
     reply_keyboard = [["Si"], ["No"]]
-    update.message.reply_text("¿Seguro de eliminar su cuenta?",
+    update.message.reply_text("Seguro de eliminar su cuenta",
     reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return DELETE
 
@@ -38,7 +38,7 @@ def delete_account(bot, update):
     elif update.message.text == 'No':
         update.message.reply_text("Gracias por seguir con nosotros")
     else:
-        update.message.reply_text("¿Que haces acá?")
+        update.message.reply_text("Que haces acá")
 
 
 def main():
