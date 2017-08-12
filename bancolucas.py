@@ -108,7 +108,7 @@ def main():
     )
 
     dispatcher.add_handler(delete_handler)
-    dispatcher.add_handler(bancoServices.services_handler)
+    dispatcher.add_handler(bancoServices.service_handler)
     active_handler = CommandHandler('activar', active_account)
     dispatcher.add_handler(active_handler)
 
