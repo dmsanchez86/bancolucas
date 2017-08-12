@@ -24,13 +24,13 @@ def show_account(bot, update):
     update.message.reply_text(dates)
 
 
-# def sure_delete_account(bot, update):
-#     helper = DBHelper()
-#     helper.add_command(update.message.chat_id, update.message.text)
-#     reply_keyboard = [["Si"], ["No"]]
-#     update.message.reply_text("Seguro de eliminar su cuenta",
-#     reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
-#     return DELETE
+def sure_delete_account(bot, update):
+    helper = DBHelper()
+    helper.add_command(update.message.chat_id, update.message.text)
+    reply_keyboard = [["Si"], ["No"]]
+    update.message.reply_text("Seguro de eliminar su cuenta",
+    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+    return DELETE
 #
 #
 # def delete_account(bot, update):
@@ -42,7 +42,8 @@ def show_account(bot, update):
 #     else:
 #         update.message.reply_text("Que haces aca")
 
-
+def delete_account(bot, update):
+    pass
 def cancel(bot, update):
     pass
 
@@ -52,11 +53,21 @@ def main():
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
 
+    delete_handler = ConversationHandler(
+        entry_points=[CommandHandler('delete', sure_delete_account)],
+
+        states={
+            DELETE: [RegexHandler('^(Si|No)$', delete_account)]
+        },
+
+        fallbacks=[CommandHandler('cancel', cancel)]
+    )
+
     # delete_handler = ConversationHandler(entry_points=[CommandHandler('delete', sure_delete_account)],
     #                                      states={DELETE: [RegexHandler('^(Si|No)$', delete_account)]},
     #                                      fallbacks=[CommandHandler('cancel', cancel)])
     #
-    # dispatcher.add_handler(delete_handler)
+    dispatcher.add_handler(delete_handler)
 
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
