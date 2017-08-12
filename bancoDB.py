@@ -95,7 +95,7 @@ class DBHelper():
             query = "INSERT INTO commands (num_user, command) VALUES (%s, %s);"
             if self.user_exists(num_user):
                 with connection.cursor() as cursor:
-                    cursor.execute("UPDATE commands SET command=(%s) WHERE num_user= (%s)", (command, num_user,))
+                    cursor.execute("UPDATE commands SET command=(%s) WHERE num_user= (%s);", (command, num_user,))
                     connection.commit()
             else:
                 with connection.cursor() as cursor:
