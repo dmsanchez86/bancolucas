@@ -1,10 +1,10 @@
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, ConversationHandler
+from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, ConversationHandler, RegexHandler
 import os
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 import bancoFilter
 
-DELETE, DO = range(1)
+DELETE = 0
 
 def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
@@ -26,12 +26,15 @@ def sure_delete_account(bot, update):
 
 # logic for delete account
 def delete_account(bot, update):
-    helper = DBHelper()
-    helper.delete_account(update.message.chat_id)
-    if helper.account_exists(update.message.chat_id):
-        update.message.reply_text("Upss Parece que tenemos un problema. Intenta de nuevo mas tarde.")
+    if update.message.text == "Si":
+        helper = DBHelper()
+        helper.delete_account(update.message.chat_id)
+        if helper.account_exists(update.message.chat_id):
+            update.message.reply_text("Upss Parece que tenemos un problema. Intenta de nuevo mas tarde.")
+        else:
+            update.message.reply_text("Cuenta eliminada!")
     else:
-        update.message.reply_text("Cuenta eliminada!")
+        update.message.reply_text("Okkk")
 
 def what_to_do(bot, update):
     pass
@@ -53,7 +56,7 @@ def main():
         entry_points=[CommandHandler('delete', sure_delete_account)],
 
         states={
-            DELETE: [MessageHandler(bancoFilter.filter_si, delete_account)]
+            DELETE: [RegexHandler('^(Si|No)$', delete_account)]
         },
 
         fallbacks=[CommandHandler('cancel', cancel)]
