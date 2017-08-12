@@ -8,7 +8,7 @@ import bancoFilter
 OPERATIONS = 0
 ADD_BALANCE = 1
 def services(bot, update):
-    reply_keyboard = [["Tansferencias"], ["Add fondos"]]
+    reply_keyboard = [["Add fondos"]]
     update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return OPERATIONS
 
@@ -20,15 +20,8 @@ def cancel(bot, update):
 
 def add_balance(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="hi")
-    return OPERATIONS
 
 # def add_balance_logic(bot, update):
 #     bot.send_message(chat_id=update.message.chat_id, text="hi")
 
-service_handler = ConversationHandler(
-    entry_points=[MessageHandler(bancoFilter.filter_service, services)],
-    states={
-        OPERATIONS:[MessageHandler(bancoFilter.filter_add_balance, add_balance)]
-    },
-    fallbacks=[CommandHandler('cancel', cancel)]
-)
+add_balance_handler = CommandHandler("add", add_balance)
