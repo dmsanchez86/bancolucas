@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-from telegram.ext import Updater, CommandHandler, ConversationHandler, RegexHandler
+from telegram.ext import Updater, CommandHandler, ConversationHandler, RegexHandler, Filters
 import os
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
+import bancoFilter
 
-DELETE = 0
+DELETE, OPTIONS= range(1)
 
 
 def start(bot, update):
@@ -49,19 +50,41 @@ def desactivate_account(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="Cuenta desactivada. '/activar' para volver a usar su cuenta.")
     return ConversationHandler.END
 
-
-def cancel(bot, update):
-    pass
-
 def active_account(bot, update):
     helper = DBHelper()
     helper.activate_account(update.message.chat_id)
     bot.send_message(chat_id=update.message.chat_id, text="Cuenta activada.")
 
+
+def options(bot, update):
+    helper = DBHelper()
+    if helper.account_exists(update.message.chat_id) and helper.show_account(update.message.chat_id)[3]:
+        reply_keyboard = [["Ver nuestros servicios"], ["Desactivar cuenta"]]
+        update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+        return OPTIONS
+
+def services(bot, update):
+    bot.send_message(chat_id=update.message.chat_id, text="Nuestros servicios:")
+    return ConversationHandler.END
+
+
+def cancel(bot, update):
+    pass
+
 def main():
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
+
+    options_handler = ConversationHandler(
+        entry_points=[CommandHandler('opciones', options)],
+        states={
+            OPTIONS: [Filters.text(bancoFilter.filter_service, services)]
+        },
+        fallbacks=[CommandHandler('cancel', cancel)]
+    )
+
+    dispatcher.add_handler(options_handler)
 
     delete_handler = ConversationHandler(
         entry_points=[CommandHandler('desactivar', sure_desactivate_account)],
