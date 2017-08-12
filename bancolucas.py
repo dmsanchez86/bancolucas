@@ -21,7 +21,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                       port=PORT,
                       url_path=TOKEN)
-    updater.bot.set_webhook("https://todolistbot.herokuapp.com/" + TOKEN)
+    updater.bot.set_webhook("https://kodefest6.herokuapp.com/" + TOKEN)
     updater.idle()
 
 if __name__ == '__main__':
