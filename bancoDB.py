@@ -124,7 +124,7 @@ class DBHelper():
         try:
             query = "INSERT INTO transfers (id, num_account_sender, num_account_receive, account_balance, date, state) VALUES (%s, %s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
-                cursor.execute(query, (num_account, name_user, account_balance, state,))
+                cursor.execute(query, (num_account_sender, name_user, account_balance, state,))
                 connection.commit()
         finally:
             connection.close()
