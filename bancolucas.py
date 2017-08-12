@@ -6,22 +6,34 @@ def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
-        date_account = helper.show_account(update.message.chat_id)
-        update.message.reply_text(date_account)
+        update.message.reply_text("Ya tienes cuenta")
     else:
         helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0)
         date_account = helper.show_account(update.message.chat_id)
         update.message.reply_text(date_account)
 
 
-def what_to_do(bot, update):
-    pass
+def show_account(bot, update):
+    helper = DBHelper()
+    if helper.account_exists(update.message.chat_id):
+        date_account = helper.show_account(update.message.chat_id)
+        dates = ""
+        for date in date_account:
+            dates += date + "\n"
+        update.message.reply_text(dates)
+    else:
+        pass
+
+
 
 def main():
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
     start_handler = CommandHandler('start', start)
+    dispatcher.add_handler(start_handler)
+
+    start_handler = CommandHandler('showAccount', show_account)
     dispatcher.add_handler(start_handler)
 
     PORT = int(os.environ.get('PORT', '5000'))
