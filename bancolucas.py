@@ -75,6 +75,9 @@ def main():
 
     dispatcher.add_handler(delete_handler)
 
+    active_handler = CommandHandler('activar', active_account)
+    dispatcher.add_handler(active_handler)
+
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
 
