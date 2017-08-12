@@ -7,14 +7,15 @@ DELETE = 0
 
 
 def start(bot, update):
-    update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
+    update.message.reply_text('Bienvenido. En este momento nuestro equipo crea su cuenta.')
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
         update.message.reply_text("Ya tienes cuenta")
     else:
         helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0)
         date_account = helper.show_account(update.message.chat_id)
-        update.message.reply_text(date_account)
+        dates = "Su cuenta se creo con exito, los datos son:\nNumero de Cuenta: {} \nNombre del Cliente: {} \nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
+        update.message.reply_text(dates)
 
 
 def show_account(bot, update):
@@ -35,6 +36,7 @@ def delete_account(bot, update):
     helper = DBHelper()
     if update.message.text == 'Si' and helper.account_exists(update.message.chat_id):
         helper.delete_account(update.message.chat_id)
+        update.message.chat_id("Su cuenta ha sido eliminada.")
     elif not helper.account_exists(update.message.chat_id):
         update.message.reply_text("Usted no tiene aun una cuenta, nuestro equipo lo invita a unirse. Solo debe digitar '/start'")
     else:
