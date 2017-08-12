@@ -35,12 +35,11 @@ def sure_delete_account(bot, update):
 
 def delete_account(bot, update):
     helper = DBHelper()
-    if helper.ultimate_command(update.message.chat_id)[1] == '/delete' and update.message.text == 'Si':
+    if update.message.text == 'Si':
         helper.delete_account(update.message.chat_id)
-    elif update.message.text == 'No':
-        update.message.reply_text("Gracias por seguir con nosotros")
     else:
-        update.message.reply_text("Que haces aca")
+        update.message.reply_text("Gracias por seguir con nosotros")
+    return ConversationHandler.END
 
 def cancel(bot, update):
     pass
