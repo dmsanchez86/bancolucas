@@ -29,21 +29,24 @@ def show_account(bot, update):
     if exists_acc:
         date_account = helper.show_account(update.message.chat_id)
         dates = "Numero de Cuenta: {} \nNombre del Cliente: {} \nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
-        update.message.reply_text(dates)
+        if date_account[3] == False:
+            update.message.reply_text("Cuenta desavtivada '/activar' para activar.")
+        else:
+            update.message.reply_text(dates)
     else:
-        update.message.reply_text("No existe la cuenta.")
+        update.message.reply_text("No existe la cuenta. '/start' para crear una nueva cuenta.")
 
 
-def sure_delete_account(bot, update):
+def sure_desactivate_account(bot, update):
     reply_keyboard = [["Si"], ["No"]]
     update.message.reply_text("¿Seguro de eliminar su cuenta?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return DELETE
 
 
-def delete_account(bot, update):
+def desactivate_account(bot, update):
     helper = DBHelper()
-    helper.delete_account(update.message.chat_id)
-    bot.send_message(chat_id=update.message.chat_id, text="Cuenta eliminada.")
+    helper.desactivate_account(update.message.chat_id)
+    bot.send_message(chat_id=update.message.chat_id, text="Cuenta desactivada. '/activar' para volver a usar su cuenta.")
     return ConversationHandler.END
 
 
@@ -57,10 +60,10 @@ def main():
     dispatcher = updater.dispatcher
 
     delete_handler = ConversationHandler(
-        entry_points=[CommandHandler('delete', sure_delete_account)],
+        entry_points=[CommandHandler('desactivar', sure_desactivate_account)],
 
         states={
-            DELETE: [RegexHandler('^(Si|No)$', delete_account)]
+            DELETE: [RegexHandler('^(Si|No)$', desactivate_account)]
         },
 
         fallbacks=[CommandHandler('cancel', cancel)]

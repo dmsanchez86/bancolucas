@@ -22,7 +22,7 @@ class DBHelper():
             port=port
         )
         cur = conn.cursor()
-        cur.execute("CREATE TABLE IF NOT EXISTS accounts (num_account integer, name_user text, account_balance integer);")
+        cur.execute("CREATE TABLE IF NOT EXISTS accounts (num_account integer, name_user text, account_balance integer, state bool);")
         return conn
 
 
@@ -30,9 +30,9 @@ class DBHelper():
     def create_account(self, num_account, name_user, account_balance):
         connection = self.connect()
         try:
-            query = "INSERT INTO accounts (num_account, name_user, account_balance) VALUES (%s, %s, %s);"
+            query = "INSERT INTO accounts (num_account, name_user, account_balance, state) VALUES (%s, %s, %s, %s);"
             with connection.cursor() as cursor:
-                cursor.execute(query, (num_account, name_user, account_balance,))
+                cursor.execute(query, (num_account, name_user, account_balance, true,))
                 connection.commit()
         finally:
             connection.close()
@@ -64,11 +64,21 @@ class DBHelper():
         finally:
             connection.close()
 
-    # delete account
-    def delete_account(self, num_account):
+    # desactivate account
+    def desactivate_account(self, num_account):
         connection = self.connect()
         try:
-            query = "DELETE FROM accounts WHERE num_account = %s"
+            query = "UPDATE accounts SET state = False WHERE num_account = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account,))
+                connection.commit()
+        finally:
+            connection.close()
+
+    def activate_account(self, num_account):
+        connection = self.connect()
+        try:
+            query = "UPDATE accounts SET state = True WHERE num_account = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 connection.commit()
