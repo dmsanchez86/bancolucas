@@ -41,7 +41,10 @@ def delete_account(bot, update):
     helper = DBHelper()
     if update.message.text == 'Si' and helper.account_exists(update.message.chat_id):
         helper.delete_account(update.message.chat_id)
-        update.message.chat_id("Su cuenta ha sido eliminada.")
+        if not helper.account_exists(update.message.chat_id):
+            update.message.chat_id("Su cuenta ha sido eliminada.")
+        else:
+            update.message.chat_id("Ups, ocurrio un problema '/delete' para volver a intentarlo.")
         return ConversationHandler.END
     elif not helper.account_exists(update.message.chat_id):
         update.message.reply_text("Usted no tiene aun una cuenta, nuestro equipo lo invita a unirse. Solo debe digitar '/start'")
