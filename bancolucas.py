@@ -25,9 +25,13 @@ def start(bot, update):
 
 def show_account(bot, update):
     helper = DBHelper()
-    date_account = helper.show_account(update.message.chat_id)
-    dates = "Numero de Cuenta: {} \nNombre del Cliente: {} \nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
-    update.message.reply_text(dates)
+    exists_acc = helper.account_exists(update.message.chat_id)
+    if exists_acc:
+        date_account = helper.show_account(update.message.chat_id)
+        dates = "Numero de Cuenta: {} \nNombre del Cliente: {} \nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
+        update.message.reply_text(dates)
+    else:
+        update.message.reply_text("No existe la cuenta.")
 
 
 def sure_delete_account(bot, update):
@@ -39,6 +43,7 @@ def sure_delete_account(bot, update):
 def delete_account(bot, update):
     helper = DBHelper()
     helper.delete_account(update.message.chat_id)
+    bot.send_message(chat_id=update.message.chat_id, text="Cuenta eliminada.")
     return ConversationHandler.END
 
 
