@@ -19,7 +19,7 @@ def start(bot, update):
 def delete_account(bot, update):
     update.message.reply_text("¿Seguro que deseas eliminar tu cuenta?")
     reply_keyboard = [['Si', 'No']]
-    reply_markup = ReplyKeyboardMarkup(reply_keyboard)
+    reply_markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
     if reply_markup == 'Si':
         helper = DBHelper()
         helper.delete_account(update.message.chat_id)
