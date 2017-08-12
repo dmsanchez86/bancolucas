@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2179139-271b-496a-a681-6096276cf951" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancolucas.py" afterPath="$PROJECT_DIR$/bancolucas.py" />
-    </list>
+    <list default="true" id="e2179139-271b-496a-a681-6096276cf951" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +14,8 @@
       <file leaf-file-name="bancolucas.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bancolucas.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+            <state relative-caret-position="544">
+              <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding>
                 <element signature="e#24#107#0" expanded="true" />
               </folding>
@@ -327,8 +325,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bancolucas.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="40" column="23" lean-forward="false" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+        <state relative-caret-position="544">
+          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding>
             <element signature="e#24#107#0" expanded="true" />
           </folding>
