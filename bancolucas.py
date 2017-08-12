@@ -13,7 +13,7 @@ def create_account(bot, update):
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
         bot.send_message(chat_id=update.message.chat_id, text='Ya tiene cuenta')
-        return ConversationHandler.END
+        return OPTIONS
     else:
         bot.send_message(chat_id=update.message.chat_id, text='Bienvenido. En este momento nuestro equipo crea su cuenta.')
         helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0, True)
@@ -23,7 +23,7 @@ def create_account(bot, update):
             "\nNumero de Cuenta: {} \nNombre del Cliente: {} " \
             "\nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
         update.message.reply_text(dates)
-        return ConversationHandler.END
+        return OPTIONS
 
 
 def show_account(bot, update):
