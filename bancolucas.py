@@ -87,8 +87,10 @@ def cancel(bot, update):
 # bancoServices
 
 def services(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="Nuestros servicios:")
-    return ConversationHandler.END
+    reply_keyboard = [["Tansferencias"]]
+    update.message.reply_text("Nuestros servicios: ",
+                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+    return OPTIONS
 
 def exchange_cash(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="Escriba el numero de la cuenta a la cual va a transferir el dinero: ")
