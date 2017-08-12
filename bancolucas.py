@@ -38,7 +38,7 @@ def delete_account(bot, update):
     elif update.message.text == 'No':
         update.message.reply_text("Gracias por seguir con nosotros")
     else:
-        update.message.reply_text("Que haces acá")
+        update.message.reply_text("Que haces aca")
 
 
 def main():
