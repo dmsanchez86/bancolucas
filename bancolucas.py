@@ -56,6 +56,7 @@ def main():
                                          states={DELETE: [RegexHandler('^(Si|No)$', delete_account)]}, fallbacks=[CommandHandler('cancel', cancel)])
 
     dispatcher.add_handler(delete_handler)
+
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
 
