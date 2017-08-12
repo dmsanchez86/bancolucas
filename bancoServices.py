@@ -8,7 +8,7 @@ import bancoFilter
 TRANSFER = 0
 ADD_BALANCE = 1
 def services(bot, update):
-    reply_keyboard = [["Tansferencias"], ["Añadir fondos"]]
+    reply_keyboard = [["Tansferencias"], ["Add fondos"]]
     update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return TRANSFER
 
