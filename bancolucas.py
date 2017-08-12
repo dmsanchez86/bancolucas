@@ -65,6 +65,10 @@ def options(bot, update):
         reply_keyboard = [["Ver nuestros servicios"], ["Desactivar cuenta"]]
         update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
         return OPTIONS
+    elif helper.account_exists(update.message.chat_id):
+        reply_keyboard = [["Ver nuestros servicios"], ["Activar cuenta"]]
+        update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+        return OPTIONS
     elif not helper.account_exists(update.message.chat_id):
         reply_keyboard = [["Crear cuenta"], ["Ver nuestros servicios"]]
         update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
