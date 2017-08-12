@@ -28,7 +28,7 @@ def add_balance(bot, update):
 service_handler = ConversationHandler(
     entry_points=[MessageHandler(bancoFilter.filter_service, services)],
     states={
-        OPERATIONS:[MessageHandler(bancoFilter.filter_add_balance, add_balance),]
+        OPERATIONS:[MessageHandler(bancoFilter.filter_add_balance, add_balance)]
     },
     fallbacks=[CommandHandler('cancel', cancel)]
 )
