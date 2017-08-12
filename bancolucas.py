@@ -1,6 +1,9 @@
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
+from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, ConversationHandler
 import os
 from bancoDB import DBHelper
+from telegram import ReplyKeyboardMarkup
+
+OPTION = 0
 
 def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
@@ -24,6 +27,7 @@ def main():
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
+
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
 
