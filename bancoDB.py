@@ -32,7 +32,7 @@ class DBHelper():
         try:
             query = "INSERT INTO tasks (num_account, name_user, account_balance) VALUES (%s, %s, %s);"
             with connection.cursor() as cursor:
-                cursor.execute(query, (num_account, name_user, account_balance))
+                cursor.execute(query, (num_account, name_user, account_balance,))
                 connection.commit()
         finally:
             connection.close()
