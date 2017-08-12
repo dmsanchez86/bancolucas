@@ -14,5 +14,9 @@ def services(bot, update):
 def transfer(bot, update):
     pass
 
+def cancel(bot, update):
+    pass
 services_handler = ConversationHandler(entry_points=MessageHandler(bancoFilter.filter_service, services),
-                                       states={TRANSFER:[MessageHandler(bancoFilter.filter_transfer, transfer)]})
+                                       states={TRANSFER:[MessageHandler(bancoFilter.filter_transfer, transfer)]},
+                                       fallbacks=[CommandHandler('cancel', cancel)]
+                                       )
