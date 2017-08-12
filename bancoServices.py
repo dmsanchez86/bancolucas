@@ -20,7 +20,7 @@ def cancel(bot, update):
 
 def add_balance(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="hi")
-    return ADD_BALANCE
+    return OPERATIONS
 
 # def add_balance_logic(bot, update):
 #     bot.send_message(chat_id=update.message.chat_id, text="hi")
