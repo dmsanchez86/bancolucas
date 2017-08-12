@@ -19,7 +19,7 @@ def cancel(bot, update):
     pass
 
 def add_balance(bot, update):
-    update.message.reply_text("¿Cuanto vas a añadir?")
+    bot.send_message(chat_id=update.message.chat_id, text="hi")
     return ADD_BALANCE
 
 # def add_balance_logic(bot, update):
