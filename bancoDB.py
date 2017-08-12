@@ -27,12 +27,12 @@ class DBHelper():
 
 
     # create account bank user
-    def create_account(self, num_account, name_user, account_balance):
+    def create_account(self, num_account, name_user, account_balance, state):
         connection = self.connect()
         try:
             query = "INSERT INTO accounts (num_account, name_user, account_balance, state) VALUES (%s, %s, %s, %s);"
             with connection.cursor() as cursor:
-                cursor.execute(query, (num_account, name_user, account_balance, true,))
+                cursor.execute(query, (num_account, name_user, account_balance, state,))
                 connection.commit()
         finally:
             connection.close()

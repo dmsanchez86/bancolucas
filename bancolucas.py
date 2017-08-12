@@ -14,7 +14,7 @@ def start(bot, update):
         update.message.reply_text("Ya tienes cuenta")
     else:
         update.message.reply_text('Bienvenido. En este momento nuestro equipo crea su cuenta.')
-        helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0)
+        helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0, True)
         date_account = helper.show_account(update.message.chat_id)
         dates = "Su cuenta se creo con éxito, " \
                 "los datos son:" \
