@@ -76,24 +76,23 @@ class DBHelper():
         finally:
             connection.close()
 
-    # def user_exists(self, num_user):
-    #     connection = self.connect()
-    #     try:
-    #         query = "SELECT * FROM commands WHERE num_user = %s"
-    #         with connection.cursor() as cursor:
-    #             cursor.execute(query, (num_user,))
-    #             if cursor.fetchone() is None:
-    #                 return False
-    #             else:
-    #                 return True
-    #     finally:
-    #         connection.close()
+    def user_exists_command(self, num_account):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM commands WHERE num_account = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account,))
+                if cursor.fetchone() is None:
+                    return False
+                else:
+                    return True
+        finally:
+            connection.close()
 
     def add_command(self, num_user, command):
         connection = self.connect()
         try:
-
-            if True:
+            if not self.user_exists_command(num_user):
                 query_insert = "INSERT INTO commands (num_user, command) VALUES (%s, %s);"
                 with connection.cursor() as cursor:
                     cursor.execute(query_insert, (num_user, command,))
