@@ -23,3 +23,15 @@ class FilterActivateAccount(telegram.ext.BaseFilter):
         return message.text == 'Activar cuenta'
 
 filter_activate_account = FilterActivateAccount()
+
+class FilterExchangeCash(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == 'Transferencias'
+
+filter_exchange_cash = FilterExchangeCash()
+
+class FilterNumberAccount(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text.isdigit()
+
+filter_num_account = FilterNumberAccount()

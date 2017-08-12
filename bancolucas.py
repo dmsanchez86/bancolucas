@@ -4,10 +4,13 @@ import os
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 import bancoFilter
+import bancoServices
+
 
 DELETE = 0
 OPTIONS = 0
-
+SERVICES = 0
+NUMBER_ACCOUNT = 1
 
 def create_account(bot, update):
     helper = DBHelper()
@@ -75,10 +78,6 @@ def options(bot, update):
         update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
         return OPTIONS
 
-def services(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="Nuestros servicios:")
-    return ConversationHandler.END
-
 
 def cancel(bot, update):
     pass
@@ -88,10 +87,22 @@ def main():
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
 
+
+    services_handler = ConversationHandler(
+        entry_points=[CommandHandler('servicios', bancoServices.services)],
+        states={
+            OPTIONS:[MessageHandler(bancoFilter.filter_exchange_cash, bancoServices.exchange_cash)],
+            NUMBER_ACCOUNT:[MessageHandler(bancoFilter.filter_num_account), ]
+        },
+        fallbacks=[CommandHandler('cancel', cancel)]
+    )
+
+    dispatcher.add_handler(services_handler)
+
     options_handler = ConversationHandler(
         entry_points=[CommandHandler('opciones', options), CommandHandler('start', options)],
         states={
-            OPTIONS: [MessageHandler(bancoFilter.filter_service, services),
+            OPTIONS: [MessageHandler(bancoFilter.filter_service, bancoServices.services),
                       MessageHandler(bancoFilter.filter_new_account, create_account),
                       MessageHandler(bancoFilter.filter_desactivate_account, desactivate_account),
                       MessageHandler(bancoFilter.filter_activate_account, active_account)]
