@@ -63,3 +63,14 @@ class DBHelper():
                 return cursor.fetchone()
         finally:
             connection.close()
+
+    # delete account
+    def delete_account(self, num_account):
+        connection = self.connect()
+        try:
+            query = "DELETE FROM accounts WHERE num_account = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account,))
+                connection.commit()
+        finally:
+            connection.close()
