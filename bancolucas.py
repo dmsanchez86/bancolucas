@@ -4,8 +4,7 @@ from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 import bancoFilter
 
-DELETE = 0
-DO = 1
+DELETE, DO = range(1)
 
 def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
@@ -42,11 +41,14 @@ def cancel(bot, update):
     pass
 
 def main():
+    # config Telegram Bot
     TOKEN = "382499494:AAEJrdhHmXy46VV-RrBv0xmkIJps09eJyD4"
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
+
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
+
     delete_handler = ConversationHandler(
         entry_points=[CommandHandler('delete', sure_delete_account)],
 
@@ -56,8 +58,9 @@ def main():
 
         fallbacks=[CommandHandler('cancel', cancel)]
     )
-
     dispatcher.add_handler(delete_handler)
+
+    # config webhook Heroku
     PORT = int(os.environ.get('PORT', '5000'))
     updater.start_webhook(listen="0.0.0.0",
                       port=PORT,
