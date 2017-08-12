@@ -15,16 +15,16 @@ NUMBER_ACCOUNT = 1
 def create_account(bot, update):
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
-        bot.send_message(chat_id=update.message.chat_id, text='Ya tiene cuenta')
+        bot.send_message(chat_id=update.message.chat_id, text='Ya tiene una cuenta registrada')
         return OPTIONS
     else:
-        bot.send_message(chat_id=update.message.chat_id, text='Bienvenido. En este momento nuestro equipo crea su cuenta.')
+        bot.send_message(chat_id=update.message.chat_id, text='Bienvenido. En este momento nuestro equipo está creando su cuenta.')
         helper.create_account(update.message.chat_id, "{}".format(update.message.from_user.first_name), 0, True)
         date_account = helper.show_account(update.message.chat_id)
-        dates = "Su cuenta se creo con éxito, " \
+        dates = "=> Su cuenta se creo con éxito, " \
             "los datos son:" \
-            "\nNumero de Cuenta: {} \nNombre del Cliente: {} " \
-            "\nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
+            "\n\n* Numero de Cuenta: {} \n* Nombre del Cliente: {} " \
+            "\n* Saldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
         update.message.reply_text(dates)
         return OPTIONS
 
@@ -36,7 +36,7 @@ def show_account(bot, update):
         date_account = helper.show_account(update.message.chat_id)
         dates = "Numero de Cuenta: {} \nNombre del Cliente: {} \nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
         if date_account[3] == False:
-            update.message.reply_text("Cuenta desavtivada '/activar' para activar.")
+            update.message.reply_text("Cuenta desactivada '/activar' para activar.")
         else:
             update.message.reply_text(dates)
     else:
