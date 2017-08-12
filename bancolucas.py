@@ -16,10 +16,7 @@ def start(bot, update):
 def show_account(bot, update):
     helper = DBHelper()
     date_account = helper.show_account(update.message.chat_id)
-    dates = ""
-    for date in date_account:
-        dates += date + "\n"
-    update.message.reply_text(dates)
+    update.message.reply_text(date_account)
 
 
 def main():
