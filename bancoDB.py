@@ -110,12 +110,12 @@ class DBHelper():
 
 
 
-    # def ultimate_command(self, num_user):
-    #     connection = self.connect()
-    #     try:
-    #         query = "SELECT * FROM commands WHERE num_user = %s"
-    #         with connection.cursor() as cursor:
-    #             cursor.execute(query, (num_user,))
-    #             return cursor.fetchone()
-    #     finally:
-    #         connection.close()
+    def ultimate_command(self, num_user):
+        connection = self.connect()
+        try:
+            query = "SELECT * FROM commands WHERE num_user = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_user,))
+                return cursor.fetchone()
+        finally:
+            connection.close()
