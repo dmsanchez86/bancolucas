@@ -68,6 +68,9 @@ def main():
     )
     dispatcher.add_handler(delete_handler)
 
+    show_handler = CommandHandler('show', show_account)
+    dispatcher.add_handler(show_handler)
+
     # config webhook Heroku
     PORT = int(os.environ.get('PORT', '5000'))
     updater.start_webhook(listen="0.0.0.0",
