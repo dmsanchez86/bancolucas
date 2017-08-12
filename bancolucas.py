@@ -8,7 +8,9 @@ def start(bot, update):
     if helper.account_exists(update.message.chat_id):
         update.message.reply_text('hii')
     else:
-        update.message.reply_text('creando cuenta...')
+        helper.create_account(update.message.chat_id, "{} {}".format(update.message.from_user.first_name, update.message.from_user.second_name), 0)
+        date_account = helper.show_account(update.message.chat_id)
+        update.message.reply_text(date_account)
 
 
 def cancel(bot, update):
