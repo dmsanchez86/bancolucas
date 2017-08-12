@@ -15,15 +15,11 @@ def start(bot, update):
 
 def show_account(bot, update):
     helper = DBHelper()
-    if helper.account_exists(update.message.chat_id):
-        date_account = helper.show_account(update.message.chat_id)
-        dates = ""
-        for date in date_account:
-            dates += date + "\n"
-        update.message.reply_text(dates)
-    else:
-        pass
-
+    date_account = helper.show_account(update.message.chat_id)
+    dates = ""
+    for date in date_account:
+        dates += date + "\n"
+    update.message.reply_text(dates)
 
 
 def main():
@@ -33,7 +29,7 @@ def main():
     start_handler = CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
 
-    start_handler = CommandHandler('showAccount', show_account)
+    start_handler = CommandHandler('vercuenta', show_account)
     dispatcher.add_handler(start_handler)
 
     PORT = int(os.environ.get('PORT', '5000'))
