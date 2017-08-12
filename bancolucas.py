@@ -11,20 +11,21 @@ def start(bot, update):
     update.message.reply_text('Hi! Luckily, this bot works. Now, let\'s do stuff!')
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id):
-        return DO
+        update.message.reply_text("ssssssss")
     else:
         helper.create_account(update.message.chat_id,
                               "{} {}".format(update.message.from_user.first_name, update.message.from_user.second_name), 0)
         date_account = helper.show_account(update.message.chat_id)
         update.message.reply_text(date_account)
 
-
+# Ask the user if you are sure to delete your account
 def sure_delete_account(bot, update):
     reply_keyboard = [['Si', 'No']]
     update.message.reply_text("¿Seguro que deseas eliminar tu cuenta?",
                               reply_markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
     return DELETE
 
+# logic for delete account
 def delete_account(bot, update):
     helper = DBHelper()
     helper.delete_account(update.message.chat_id)
