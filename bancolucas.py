@@ -17,6 +17,11 @@ def start(bot, update):
         date_account = helper.show_account(update.message.chat_id)
         update.message.reply_text(date_account)
 
+def show_account(bot, update):
+    helper = DBHelper()
+    date_account = helper.show_account(update.message.chat_id)
+    update.message.reply_text(date_account)
+
 # Ask the user if you are sure to delete your account
 def sure_delete_account(bot, update):
     reply_keyboard = [['Si', 'No']]
