@@ -92,7 +92,8 @@ def main():
         states={
             OPTIONS: [MessageHandler(bancoFilter.filter_service, services),
                       MessageHandler(bancoFilter.filter_new_account, create_account),
-                      MessageHandler(bancoFilter.filter_desactivate_account, desactivate_account)]
+                      MessageHandler(bancoFilter.filter_desactivate_account, desactivate_account),
+                      MessageHandler(bancoFilter.filter_activate_account, active_account)]
         },
         fallbacks=[CommandHandler('cancel', cancel)]
     )

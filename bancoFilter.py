@@ -17,3 +17,9 @@ class FilterDesactivateAccount(telegram.ext.BaseFilter):
         return message.text == 'Desactivar cuenta'
 
 filter_desactivate_account = FilterDesactivateAccount()
+
+class FilterActivateAccount(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == 'Activar cuenta'
+
+filter_activate_account = FilterActivateAccount()
