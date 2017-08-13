@@ -3,6 +3,7 @@ from telegram.ext import CommandHandler, ConversationHandler, MessageHandler
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 import bancoFilter
+import time
 
 ADD_BALANCE, ADD_BALANCE_NUMBER, GET_BALANCE, WITHDRAW, WITHDRAW_NUMBER, ACCOUNT_INFO, TRANSFERIR, TRANSFERIR_MONTO, TRANSFERIR_EXECUTE = range(9)
 
@@ -28,17 +29,19 @@ def transfer(bot, update):
     update.message.reply_text("Digite el numero de cuenta:")
     return TRANSFERIR_MONTO
 
-ids = []
+id_and_monto = []
 def transfer_monto(bot, update):
     update.message.reply_text("Digita el monto a transferir:")
-    global ids
-    ids = [update.message.text]
+    global id_and_monto
+    id_and_monto = [update.message.text]
     return TRANSFERIR_EXECUTE
 
 
 def transfer_execute(bot, update):
-    ids.append(update.message.text)
-    update.message.reply_text(ids)
+    id_and_monto.append(update.message.text)
+    helper = DBHelper()
+    helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), time.strftime("%d/%m/%Y"), True)
+    update.message.reply_text(helper.get_transfers_sends(update.message.chat_id))
     return ConversationHandler.END
 
 

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2179139-271b-496a-a681-6096276cf951" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoDB.py" afterPath="$PROJECT_DIR$/bancoDB.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoServices.py" afterPath="$PROJECT_DIR$/bancoServices.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +30,8 @@
       <file leaf-file-name="bancoServices.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bancoServices.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+            <state relative-caret-position="225">
+              <caret line="36" column="29" lean-forward="true" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
               <folding>
                 <element signature="e#24#100#0" expanded="true" />
               </folding>
@@ -50,8 +52,8 @@
       <file leaf-file-name="bancoDB.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bancoDB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1905">
-              <caret line="127" column="35" lean-forward="true" selection-start-line="127" selection-start-column="35" selection-end-line="127" selection-end-column="35" />
+            <state relative-caret-position="274">
+              <caret line="143" column="32" lean-forward="true" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
@@ -74,8 +76,8 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/bancoFilter.py" />
-        <option value="$PROJECT_DIR$/bancoDB.py" />
         <option value="$PROJECT_DIR$/bancolucas.py" />
+        <option value="$PROJECT_DIR$/bancoDB.py" />
         <option value="$PROJECT_DIR$/bancoServices.py" />
       </list>
     </option>
@@ -420,8 +422,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bancoDB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1905">
-          <caret line="127" column="35" lean-forward="true" selection-start-line="127" selection-start-column="35" selection-end-line="127" selection-end-column="35" />
+        <state relative-caret-position="274">
+          <caret line="143" column="32" lean-forward="true" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
           </folding>
@@ -438,8 +440,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bancoServices.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+        <state relative-caret-position="225">
+          <caret line="36" column="29" lean-forward="true" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
           <folding>
             <element signature="e#24#100#0" expanded="true" />
           </folding>

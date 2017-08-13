@@ -124,10 +124,10 @@ class DBHelper():
             connection.close()
 
     # transfer money to other account
-    def transfer_to_account(self, id, num_account_sender, num_account_receive, account_balance, date, state):
+    def transfer_to_account(self, num_account_sender, num_account_receive, account_balance, date, state):
         connection = self.connect()
         try:
-            query = "INSERT INTO transfers (id, num_account_sender, " \
+            query = "INSERT INTO transfers (num_account_sender, " \
                     "num_account_receive, account_balance, date, state) " \
                     "VALUES (%s, %s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
@@ -143,7 +143,6 @@ class DBHelper():
             query = "SELECT * FROM transfers WHERE num_account_sender = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
-                connection.commit()
         finally:
             connection.close()
 
