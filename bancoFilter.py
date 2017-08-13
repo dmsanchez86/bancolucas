@@ -59,6 +59,6 @@ filter_withdraw = FilterWithdraw()
 
 class FilterAccount(telegram.ext.BaseFilter):
     def filter(self, message):
-        return message.text == "Cuenta"
+        return message.text == "Info cuenta"
 
 filter_account = FilterAccount()

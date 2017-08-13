@@ -13,7 +13,7 @@ WITHDRAW_NUMBER = 4
 ACCOUNT_INFO = 5
 
 def services(bot, update):
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Cuenta"]]
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Info cuenta"]]
 
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
@@ -55,7 +55,9 @@ def add_balance_logic(bot, update):
 def get_info(bot, update):
     helper = DBHelper()
     account_info = helper.show_account(update.message.chat_id)
-    update.message.reply_text("El número de cuenta es {}".format(account_info[0]))
+    update.message.reply_text("=> Información de la cuenta, " \
+                "\n\n* Numero de Cuenta: {} \n* Nombre del Cliente: {} " \
+                "\n* Saldo en Cuenta: ${}".format(account_info[0], account_info[1], account_info[2]))
     return ConversationHandler.END
 
 
