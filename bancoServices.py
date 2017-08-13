@@ -10,7 +10,7 @@ ADD_BALANCE_NUMBER = 1
 GET_BALANCE = 2
 
 def services(bot, update):
-    reply_keyboard = [["Add fondos"], ["Ver Saldo"]]
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"]]
 
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 

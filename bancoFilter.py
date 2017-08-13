@@ -40,7 +40,7 @@ filter_number = FilterNumber()
 
 class FilterAddBalance(telegram.ext.BaseFilter):
     def filter(self, message):
-        return message.text == "Add fondos"
+        return message.text == "Agregar Saldo"
 
 
 filter_add_balance = FilterAddBalance()
