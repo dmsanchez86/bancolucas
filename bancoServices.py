@@ -77,10 +77,7 @@ def show_transfers(bot, update):
     reply_keyboard = [["Enviadas"], ["Recibidas"], ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("Ver mis transferencias: ", reply_markup=response)
-    if response == "Enviadas":
-        return TRANSFERS_SENDS
-    else:
-        return TRANSFERS_ENTRIES
+    print(response)
 
 
 def show_transfers_sends(bot, update):
@@ -160,7 +157,6 @@ add_balance_handler = ConversationHandler(entry_points=
                                               RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
                                               SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
                                               TRANSFERS_SENDS: [MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends)],
-                                              TRANSFERS_ENTRIES: [MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
