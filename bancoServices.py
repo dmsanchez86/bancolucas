@@ -23,7 +23,7 @@ def services(bot, update):
         return GET_BALANCE
     elif response == "Retirar":
         return WITHDRAW
-    elif response == "Cuenta"
+    elif response == "Cuenta":
         return ACCOUNT_INFO
 
     return ADD_BALANCE
