@@ -67,7 +67,6 @@ class DBHelper():
             connection.close()
 
     # show account of user
-
     def show_account(self, num_account):
         connection = self.connect()
         try:
