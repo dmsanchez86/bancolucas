@@ -120,3 +120,10 @@ class FiltersRecargar(telegram.ext.BaseFilter):
         return message.text == "Recargar"
 
 filter_recargar = FiltersRecargar()
+
+
+class FiltersShowRecharges(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Mis recargas"
+
+filter_show_recharges = FiltersShowRecharges()

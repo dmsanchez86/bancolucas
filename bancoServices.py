@@ -20,12 +20,13 @@ SHOW_TRANSFERS_LOGIC = 10
 RETURN = 11
 ADD_RECARGA_MONTO = 12
 ADD_RECARGA_EXECUTE = 13
-SHOW_WITHDRAWS = 14
-RECARGAR = 15
+SHOW_RECHARGES = 14
+SHOW_WITHDRAWS = 15
+RECARGAR = 16
 
 
 def services(bot, update):
-    reply_keyboard = [["Agregar Saldo"], ["Ver saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"], ["Recargar"],
+    reply_keyboard = [["Agregar Saldo"], ["Ver saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"], ["Recargar"],["Mis recargas"],
                       ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
@@ -43,6 +44,8 @@ def services(bot, update):
         return SHOW_WITHDRAWS
     elif response == "Recargar":
         return RECARGAR
+    elif response == "Mis recargas":
+        return SHOW_RECHARGES
     elif response == "Menu Principal":
         return RETURN
 
@@ -203,30 +206,16 @@ def add_recarga_execute(bot, update):
                          id_and_monto_recarga[0],True)
         helper.withdraw(helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[0]), update.message.chat_id)
         update.message.reply_text("Usted a recargado la cuenta numero {} "
-                                  "por el valor de ${} y su saldo actual es {}".format(id_and_monto_recarga[0], id_and_monto_recarga[1],
+                                  "por el valor de ${} y su saldo actual es ${}".format(id_and_monto_recarga[0], id_and_monto_recarga[1],
                                                                                        helper.show_account(update.message.chat_id)[2]))
 
-# def add_recarga_monto(bot, update):
-#     global id_and_monto_recarga
-#     id_and_monto_recarga = [update.message.text]
-#     update.message.reply_text("Digite el monto que va a recargar:")
-#     return ADD_RECARGA_EXECUTE
-#
-#
-# def add_recarga_execute(bot, update):
-#     id_and_monto_recarga.append(update.message.text)
-#     helper = DBHelper()
-#     if helper.show_account(update.message.chat_id)[2] < int(id_and_monto_recarga[1]):
-#         update.message.chat_id("Saldos insuficientes.")
-#     else:
-#         helper.recharges(update.message.chat_id, id_and_monto_recarga[1],
-#                          helper.show_account(update.message.chat_id)[2],
-#                          helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[1]),
-#                          id_and_monto_recarga[0],True)
-#         helper.withdraw(helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[0]), update.message.chat_id)
-#         update.message.reply_text("Usted a recargado la cuenta numero {} "
-#                                   "por el valor de ${} y su saldo actual es {}".format(id_and_monto_recarga[0], id_and_monto_recarga[1],
-#                                                                                        helper.show_account(update.message.chat_id)[2]))
+def show_recharges(bot, update):
+    helper = DBHelper()
+    message = ""
+    for recharge_item in helper.get_recharges(update.message.chat_id):
+        message += recharge_item
+
+    update.message.reply_text(message)
 
 
 add_balance_handler = ConversationHandler(entry_points=
@@ -237,7 +226,8 @@ add_balance_handler = ConversationHandler(entry_points=
                                            MessageHandler(bancoFilter.filter_transfer, transfer),
                                            MessageHandler(bancoFilter.filter_show_transfers, show_transfers),
                                            MessageHandler(bancoFilter.filter_show_withdraws, show_withdraws),
-                                           MessageHandler(bancoFilter.filter_recargar, add_recargar)],
+                                           MessageHandler(bancoFilter.filter_recargar, add_recargar),
+                                           MessageHandler(bancoFilter.filter_show_recharges, show_recharges)],
                                           states={
                                               ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
                                               ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
