@@ -106,7 +106,7 @@ def show_transfers_sends(bot, update):
     helper = DBHelper()
     mensaje = "=> Transferencias Enviadas\n\n"
     for transfer_item in helper.get_transfers_sends(update.message.chat_id):
-        mensaje += "Cuenta N° {} - fecha {} - monto ${}. \n".format(transfer_item[2], transfer_item[4], transfer_item[3])
+        mensaje += "* Cuenta N° {} - fecha {} - monto ${}. \n".format(transfer_item[2], transfer_item[4], transfer_item[3])
 
     update.message.reply_text(mensaje)
 
@@ -115,7 +115,7 @@ def show_transfers_entries(bot, update):
     helper = DBHelper()
     mensaje = "=> Transferencias Recibidas\n\n"
     for transfer_item in helper.get_transfers_receive(update.message.chat_id):
-        mensaje += "Cuenta N° {} - fecha {} monto ${}. \n".format(transfer_item[1], transfer_item[4], transfer_item[3])
+        mensaje += "* Cuenta N° {} - fecha {} monto ${}. \n".format(transfer_item[1], transfer_item[4], transfer_item[3])
 
     update.message.reply_text(mensaje)
 
@@ -175,7 +175,7 @@ def show_withdraws(bot, update):
     helper = DBHelper()
     mensaje = "Mis Retiros \n\n"
     for withdraw_item in helper.get_withdraws(update.message.chat_id):
-        mensaje += "=> Fecha: {} saldo ${}, retiro: ${} - nuevo saldo: ${}.\n".format(withdraw_item[5], withdraw_item[2],
+        mensaje += "* Fecha: {} saldo ${}, retiro: ${} - nuevo saldo: ${}.\n".format(withdraw_item[5], withdraw_item[2],
                                                                                                withdraw_item[4], withdraw_item[3])
 
     update.message.reply_text(mensaje)
