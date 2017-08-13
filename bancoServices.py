@@ -12,7 +12,11 @@ WITHDRAW = 3
 WITHDRAW_NUMBER = 4
 
 def services(bot, update):
+<<<<<<< HEAD
     reply_keyboard = [["Add fondos"], ["Ver Saldo"], ["Retirar"]]
+=======
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"]]
+>>>>>>> 00982c16db228e814f95c29a3dc5d3693986cf96
 
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
