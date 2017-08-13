@@ -46,14 +46,13 @@ def add_balance_logic(bot, update):
     helper = DBHelper()
     sum = helper.show_account(update.message.chat_id)[2] + int(update.message.text)
     helper.add_balance(sum, update.message.chat_id)
-    update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
+    update.message.reply_text("Su saldo es ${}".format(helper.show_account(update.message.chat_id)[2]))
     return ConversationHandler.END
 
 
 def withdraw(bot, update):
     update.message.reply_text("Digita el total a retirar")
     return WITHDRAW_NUMBER
-
 
 def withdraw_logic(bot, update):
     helper = DBHelper()
