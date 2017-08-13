@@ -214,9 +214,7 @@ def show_recharges(bot, update):
     helper = DBHelper()
     mensaje = ""
     for recharge_item in helper.get_recharges(update.message.chat_id):
-        mensaje += "Usted recargo a {}, el monto de ${} el dia .\n".format(recharge_item[2], recharge_item[5],
-                                                                                   recharge_item[6])
-
+        mensaje += "Usted recargo a {}, el monto de ${} el dia {}.\n".format(recharge_item[2], recharge_item[5], recharge_item[6])
     update.message.reply_text(mensaje)
 
 
