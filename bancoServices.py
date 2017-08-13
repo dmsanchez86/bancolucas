@@ -31,10 +31,14 @@ def transfer(bot, update):
 
 id_and_monto = []
 def transfer_monto(bot, update):
-    update.message.reply_text("Digita el monto a transferir:")
-    global id_and_monto
-    id_and_monto = [update.message.text]
-    return TRANSFERIR_EXECUTE
+    if update.message.reply_text == update.message.chat_id:
+        update.message.reply_text("No puede transferir dinero de su cuenta a su cuenta.")
+        return ConversationHandler.END
+    else:
+        update.message.reply_text("Digita el monto a transferir:")
+        global id_and_monto
+        id_and_monto = [update.message.text]
+        return TRANSFERIR_EXECUTE
 
 
 def transfer_execute(bot, update):
@@ -49,7 +53,7 @@ def transfer_execute(bot, update):
         helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), True)
         transfers = helper.get_transfers_sends(update.message.chat_id)
         last_transfer = transfers[len(transfers) - 1]
-        update.message.reply_text("Su transferencia de ${} a la cuenta {} fue exitosa.".format(last_transfer[2], last_transfer[3]))
+        update.message.reply_text("Su transferencia de ${} a la cuenta No.{} fue exitosa.".format(last_transfer[3], last_transfer[2]))
     return ConversationHandler.END
 
 
