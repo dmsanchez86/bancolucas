@@ -186,7 +186,10 @@ def add_recargar(bot, update):
 id_and_monto_recarga = []
 
 def add_recarga_monto(bot, update):
-    update.message.reply_text("Cuato va a recargar")
+    global id_and_monto_recarga
+    id_and_monto_recarga = [update.message.text]
+    update.message.reply_text("Digite el monto que va a recargar:")
+    return ADD_RECARGA_EXECUTE
 
 def add_recarga_execute(bot, update):
     update.message.reply_text("jejeje")
