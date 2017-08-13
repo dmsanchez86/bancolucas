@@ -60,7 +60,9 @@ def transfer_execute(bot, update):
     if now_money < int(id_and_monto[1]):
         update.message.reply_text("Saldos insuficientes.")
     else:
+        now_money_recibe = helper.show_account(int(id_and_monto[0]))[2]
         helper.withdraw(now_money - int(id_and_monto[1]), update.message.chat_id)
+        helper.withdraw(now_money_recibe + int(id_and_monto[1]), int(id_and_monto[0]))
         helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), True)
         transfers = helper.get_transfers_sends(update.message.chat_id)
         last_transfer = transfers[len(transfers) - 1]
