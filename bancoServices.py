@@ -13,7 +13,7 @@ WITHDRAW_NUMBER = 4
 ACCOUNT_INFO = 5
 
 def services(bot, update):
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Info cuenta"]]
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"]]
 
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
