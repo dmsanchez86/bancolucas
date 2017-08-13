@@ -53,7 +53,7 @@ def services(bot, update):
 
 
 def transfer(bot, update):
-    update.message.reply_text("Digite el N° de la cuenta:")
+    update.message.reply_text("=> Digite el N° de la cuenta:")
     return TRANSFERIR_MONTO
 
 
@@ -63,12 +63,12 @@ id_and_monto = []
 def transfer_monto(bot, update):
     helper = DBHelper()
     if update.message.text == "{}".format(update.message.chat_id):
-        update.message.reply_text("No se pudo transferir dinero a su cuenta.")
+        update.message.reply_text("=> No se pudo transferir dinero a su cuenta.")
         return ConversationHandler.END
     elif not helper.account_exists(update.message.text):
-        update.message.reply_text("El N° de la cuenta no existe")
+        update.message.reply_text("=> El N° de la cuenta no existe")
     else:
-        update.message.reply_text("Digite el monto a transferir $ ")
+        update.message.reply_text("=> Digite el monto a transferir $ ")
         global id_and_monto
         id_and_monto = [update.message.text]
         return TRANSFERIR_EXECUTE
@@ -81,7 +81,7 @@ def transfer_execute(bot, update):
     name_user = helper.show_account(update.message.chat_id)[1]
 
     if now_money < int(id_and_monto[1]):
-        update.message.reply_text("$$$ Saldos insuficientes.")
+        update.message.reply_text("=> $$$ Saldos insuficientes.")
     else:
         now_money_recibe = helper.show_account(int(id_and_monto[0]))[2]
         helper.withdraw(now_money - int(id_and_monto[1]), update.message.chat_id)
@@ -89,10 +89,10 @@ def transfer_execute(bot, update):
         helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), True)
         transfers = helper.get_transfers_sends(update.message.chat_id)
         last_transfer = transfers[len(transfers) - 1]
-        update.message.reply_text("Su transferencia de ${} a la cuenta No.{} fue exitosa.".format(last_transfer[3],
+        update.message.reply_text("=> Su transferencia de ${} a la cuenta No.{} fue exitosa.".format(last_transfer[3],
                                                                                                   last_transfer[2]))
         bot.send_message(chat_id=int(id_and_monto[0]),
-                         text="Usted ha recibido ${} del usuario {} con cuenta No.{}".format(int(id_and_monto[1]), name_user, update.message.chat_id))
+                         text="=> Usted ha recibido ${} del usuario {} con cuenta No.{}".format(int(id_and_monto[1]), name_user, update.message.chat_id))
     return ConversationHandler.END
 
 
@@ -125,14 +125,14 @@ def cancel(bot, update):
 
 
 def add_balance(bot, update):
-    update.message.reply_text("Digita el total a añadir $")
+    update.message.reply_text("=> Digita el total a añadir $")
     return ADD_BALANCE_NUMBER
 
 
 def get_balance(bot, update):
     helper = DBHelper()
     balance = helper.get_balance(update.message.chat_id)
-    update.message.reply_text("Su saldo es ${}".format(balance[0]))
+    update.message.reply_text("=> Su saldo es ${}".format(balance[0]))
     return ConversationHandler.END
 
 
@@ -140,7 +140,7 @@ def add_balance_logic(bot, update):
     helper = DBHelper()
     sum = helper.show_account(update.message.chat_id)[2] + int(update.message.text)
     helper.add_balance(sum, update.message.chat_id)
-    update.message.reply_text("Su saldo es ${}".format(helper.show_account(update.message.chat_id)[2]))
+    update.message.reply_text("=> Su saldo es ${}".format(helper.show_account(update.message.chat_id)[2]))
     return ConversationHandler.END
 
 
@@ -154,7 +154,7 @@ def get_info(bot, update):
 
 
 def withdraw(bot, update):
-    update.message.reply_text("Digita el monto a retirar $")
+    update.message.reply_text("=> Digita el monto a retirar $")
     return WITHDRAW_NUMBER
 
 
@@ -173,7 +173,7 @@ def withdraw_logic(bot, update):
 
 def show_withdraws(bot, update):
     helper = DBHelper()
-    mensaje = "Mis Retiros \n\n"
+    mensaje = "=> Mis Retiros \n\n"
     for withdraw_item in helper.get_withdraws(update.message.chat_id):
         mensaje += "* Fecha: {} saldo ${}, retiro: ${} - nuevo saldo: ${}.\n".format(withdraw_item[5], withdraw_item[2],
                                                                                                withdraw_item[4], withdraw_item[3])
@@ -182,7 +182,7 @@ def show_withdraws(bot, update):
 
 
 def add_recargar(bot, update):
-    update.message.reply_text("Digite el N° de la cuenta que va a recargar:")
+    update.message.reply_text("=> Digite el N° de la cuenta que va a recargar:")
     return ADD_RECARGA_MONTO
 
 
@@ -191,7 +191,7 @@ id_and_monto_recarga = []
 def add_recarga_monto(bot, update):
     global id_and_monto_recarga
     id_and_monto_recarga = [update.message.text]
-    update.message.reply_text("Digite el monto que va a recargar:")
+    update.message.reply_text("=> Digite el monto que va a recargar:")
     return ADD_RECARGA_EXECUTE
 
 def add_recarga_execute(bot, update):
