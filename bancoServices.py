@@ -211,8 +211,7 @@ def add_recarga_execute(bot, update):
 
 
 def show_recharges(bot, update):
-    helper = DBHelper()
-    update.message.reply_text(helper.get_recharges(int(update.message.chat_id)))
+    update.message.reply_text("sss")
 
 
 add_balance_handler = ConversationHandler(entry_points=
