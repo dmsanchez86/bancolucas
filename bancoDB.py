@@ -2,7 +2,7 @@
 import psycopg2
 import urllib.parse as urlparse
 import os
-
+import datetime
 
 class DBHelper():
     def connect(self):
@@ -124,14 +124,14 @@ class DBHelper():
             connection.close()
 
     # transfer money to other account
-    def transfer_to_account(self, num_account_sender, num_account_receive, account_balance, date, state):
+    def transfer_to_account(self, num_account_sender, num_account_receive, account_balance, state):
         connection = self.connect()
         try:
             query = "INSERT INTO transfers (num_account_sender, " \
                     "num_account_receive, account_balance, date, state) " \
                     "VALUES (%s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
-                cursor.execute(query, (num_account_sender, num_account_receive, account_balance, date, state,))
+                cursor.execute(query, (num_account_sender, num_account_receive, account_balance, datetime.date.today(), state,))
                 connection.commit()
         finally:
             connection.close()
