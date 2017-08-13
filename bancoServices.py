@@ -195,7 +195,6 @@ add_balance_handler = ConversationHandler(entry_points=
                                               SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
                                               SHOW_TRANSFERS_LOGIC:[MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends),
                                                                     MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)]
-                                              #SHOW_WITHDRAWS: [MessageHandler(bancoFilter.filter_show_withdraws, show_withdraws)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
