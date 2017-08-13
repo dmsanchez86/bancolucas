@@ -22,13 +22,16 @@ def services(bot, update):
 
     return ADD_BALANCE
 
+s = ""
+
 def transfer(bot, update):
     update.message.reply_text("Digite el numero de cuenta:")
-    id_account = update.message.text
-    return TRANSFERIR_MONTO, id_account
+    s = update.message.text
+    return TRANSFERIR_MONTO
+
 
 def transfer_monto(bot, update):
-    update.message.reply_text("Digita el monto a transferir:{}".format(transfer(bot, update)[1]))
+    update.message.reply_text("Digita el monto a transferir:{}".format(s))
     return TRANSFERIR_EXECUTE
 
 
