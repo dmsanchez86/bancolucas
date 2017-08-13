@@ -128,6 +128,17 @@ class DBHelper():
         finally:
             connection.close()
 
+    # get withdraws by account
+    def get_withdraws(self, num_account):
+        connection = self.connect()
+        try:
+            query = "SELECT * from withdraw WHERE num_account = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account,))
+                return cursor.fetchone()
+        finally:
+            connection.close()
+
     # get balance account
     def get_balance(self, num_account):
         connection = self.connect()
