@@ -149,7 +149,7 @@ class DBHelper():
     def recharges(self, num_account_sender, num_account_receive, last_balance, current_balance, total_recharge, state):
         connection = self.connect()
         try:
-            query = "INSERT INTO recharge (num_account_sender, num_account_receive, " \
+            query = "INSERT INTO recharges (num_account_sender, num_account_receive, " \
                     "last_account_balance, current_account_balance, total_recharge, date, state) " \
                     "VALUES (%s, %s, %s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
