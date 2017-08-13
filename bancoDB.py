@@ -28,7 +28,7 @@ class DBHelper():
         cur.execute("CREATE TABLE IF NOT EXISTS transfers "
                     "(id serial PRIMARY KEY, num_account_sender integer, "
                     "num_account_receive integer, account_balance integer, "
-                    "date date, state bool);")
+                    "CURRENT_DATE, state bool);")
         return conn
 
 
@@ -124,14 +124,14 @@ class DBHelper():
             connection.close()
 
     # transfer money to other account
-    def transfer_to_account(self, num_account_sender, num_account_receive, account_balance, date, state):
+    def transfer_to_account(self, num_account_sender, num_account_receive, account_balance, state):
         connection = self.connect()
         try:
             query = "INSERT INTO transfers (num_account_sender, " \
-                    "num_account_receive, account_balance, date, state) " \
+                    "num_account_receive, account_balance, CURRENT-DATE, state) " \
                     "VALUES (%s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
-                cursor.execute(query, (num_account_sender, num_account_receive, account_balance, date, state,))
+                cursor.execute(query, (num_account_sender, num_account_receive, account_balance, state,))
                 connection.commit()
         finally:
             connection.close()
@@ -153,6 +153,5 @@ class DBHelper():
             query = "SELECT * FROM transfers WHERE num_account_receive = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
-                connection.commit()
         finally:
             connection.close()

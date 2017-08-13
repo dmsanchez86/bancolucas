@@ -40,7 +40,7 @@ def transfer_monto(bot, update):
 def transfer_execute(bot, update):
     id_and_monto.append(update.message.text)
     helper = DBHelper()
-    helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), time.strftime("%d/%m/%Y"), True)
+    helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), True)
     update.message.reply_text(helper.get_transfers_sends(update.message.chat_id))
     return ConversationHandler.END
 
