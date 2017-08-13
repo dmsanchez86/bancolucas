@@ -204,7 +204,7 @@ def add_recarga_execute(bot, update):
                          helper.show_account(update.message.chat_id)[2],
                          helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[1]),
                          id_and_monto_recarga[0],True)
-        helper.withdraw(helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[0]), update.message.chat_id)
+        helper.withdraw(helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[1]), update.message.chat_id)
         update.message.reply_text("Usted a recargado la cuenta numero {} "
                                   "por el valor de ${} y su saldo actual es ${}".format(id_and_monto_recarga[0], id_and_monto_recarga[1],
                                                                                        helper.show_account(update.message.chat_id)[2]))
