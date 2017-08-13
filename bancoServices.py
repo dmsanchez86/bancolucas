@@ -89,10 +89,7 @@ def show_transfers(bot, update):
     reply_keyboard = [["Enviadas"], ["Recibidas"], ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("Ver mis transferencias: ", reply_markup=response)
-    if response == ["Enviadas"]:
-        return TRANSFERS_SENDS
-    elif response == ["Recibidas"]:
-        return TRANSFERS_ENTRIES
+    return TRANSFERS_SENDS
 
 
 def show_transfers_sends(bot, update):
