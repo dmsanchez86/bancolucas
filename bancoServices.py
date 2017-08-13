@@ -2,8 +2,7 @@
 from telegram.ext import CommandHandler, ConversationHandler, MessageHandler
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
-import bancoFilter
-import bancolucas
+import bancoFilter, bancolucas
 
 
 ADD_BALANCE = 0
