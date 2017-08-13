@@ -85,7 +85,7 @@ def main():
     dispatcher = updater.dispatcher
 
     options_handler = ConversationHandler(
-        entry_points=[CommandHandler('opciones', options), CommandHandler('start', options)],
+        entry_points=[CommandHandler('opciones', options), CommandHandler('start', options), MessageHandler(bancoFilter.filter_return, options)],
         states={
             OPTIONS: [MessageHandler(bancoFilter.filter_service, bancoServices.services),
                       MessageHandler(bancoFilter.filter_new_account, create_account),

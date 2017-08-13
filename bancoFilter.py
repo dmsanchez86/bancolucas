@@ -68,3 +68,9 @@ class FilterTransfer(telegram.ext.BaseFilter):
         return message.text == "Transferir"
 
 filter_transfer = FilterTransfer()
+
+class FilterReturn(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Atras"
+
+filter_return = FilterReturn()

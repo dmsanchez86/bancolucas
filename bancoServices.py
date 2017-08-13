@@ -2,14 +2,14 @@
 from telegram.ext import CommandHandler, ConversationHandler, MessageHandler
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
-import bancoFilter
+import bancoFilter, bancolucas
 
 
-ADD_BALANCE, ADD_BALANCE_NUMBER, GET_BALANCE, WITHDRAW, WITHDRAW_NUMBER, ACCOUNT_INFO, TRANSFERIR, TRANSFERIR_MONTO, TRANSFERIR_EXECUTE = range(9)
+ADD_BALANCE, ADD_BALANCE_NUMBER, GET_BALANCE, WITHDRAW, WITHDRAW_NUMBER, ACCOUNT_INFO, TRANSFERIR, TRANSFERIR_MONTO, TRANSFERIR_EXECUTE, RETURN = range(10)
 
 def services(bot, update):
 
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"]]
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"], ["Atras"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
     if response == "Ver Saldo":
@@ -20,6 +20,8 @@ def services(bot, update):
         return ACCOUNT_INFO
     elif response == "Transferir":
         return TRANSFERIR
+    elif response == "Atras":
+        return RETURN
 
     return ADD_BALANCE
 
@@ -117,7 +119,8 @@ add_balance_handler = ConversationHandler(entry_points=
                                               ACCOUNT_INFO: [MessageHandler(bancoFilter.filter_account, get_info)],
                                               TRANSFERIR: [MessageHandler(bancoFilter.filter_transfer, transfer)],
                                               TRANSFERIR_MONTO: [MessageHandler(bancoFilter.filter_number, transfer_monto)],
-                                              TRANSFERIR_EXECUTE: [MessageHandler(bancoFilter.filter_number, transfer_execute)]
+                                              TRANSFERIR_EXECUTE: [MessageHandler(bancoFilter.filter_number, transfer_execute)],
+                                              RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
