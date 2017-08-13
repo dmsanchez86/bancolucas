@@ -18,11 +18,12 @@ RETURN = 12
 SHOW_TRANSFERS = 10
 SHOW_TRANSFERS_LOGIC = 11
 SHOW_WITHDRAWS = 9
-
-
+RECARGAR = 13
+ADD_RECARGA_EXECUTE = 15
+ADD_RECARGA_MONTO = 14
 
 def services(bot, update):
-    reply_keyboard = [["Agregar Saldo"], ["Ver saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"],
+    reply_keyboard = [["Agregar Saldo"], ["Ver saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"], ["Recargar"]
                       ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
@@ -38,6 +39,8 @@ def services(bot, update):
         return SHOW_TRANSFERS
     elif response == "Mis retiros":
         return SHOW_WITHDRAWS
+    elif response == "Recargar":
+        return RECARGAR
     elif response == "Menu Principal":
         return RETURN
 
@@ -172,6 +175,32 @@ def show_withdraws(bot, update):
 
     update.message.reply_text(mensaje)
 
+def add_recargar(bot, update):
+    update.message.reply_text("Digite el numero de cuenta que va a recargar:")
+    return ADD_RECARGA_MONTO
+
+id_and_monto_recarga = []
+def add_recarga_monto(bot, update):
+    global id_and_monto_recarga
+    id_and_monto_recarga = [update.message.text]
+    update.message.reply_text("Digite el monto que va a recargar:")
+    return ADD_RECARGA_EXECUTE
+
+def add_recarga_execute(bot, update):
+    id_and_monto_recarga.append(update.message.text)
+    helper = DBHelper()
+    if helper.show_account(update.message.chat_id)[2] < int(id_and_monto_recarga[1]):
+        update.message.chat_id("Saldos insuficientes.")
+    else:
+        helper.recharges(update.message.chat_id, id_and_monto_recarga[1],
+                         helper.show_account(update.message.chat_id)[2],
+                         helper.show_account(update.message.chat_id)[2] -  id_and_monto_recarga[1],
+                         id_and_monto_recarga[0],True)
+        helper.withdraw(helper.show_account(update.message.chat_id)[2] -  id_and_monto_recarga[0], update.message.chat_id)
+        update.message.reply_text("Usted a recargado la cuenta numero {} "
+                                  "por el valor de ${} y su saldo actual es {}".format(id_and_monto_recarga[0], id_and_monto_recarga[1],
+                                                                                       helper.show_account(update.message.chat_id)[2]))
+
 
 add_balance_handler = ConversationHandler(entry_points=
                                           [MessageHandler(bancoFilter.filter_add_balance, add_balance),
@@ -180,7 +209,8 @@ add_balance_handler = ConversationHandler(entry_points=
                                            MessageHandler(bancoFilter.filter_account, get_info),
                                            MessageHandler(bancoFilter.filter_transfer, transfer),
                                            MessageHandler(bancoFilter.filter_show_transfers, show_transfers),
-                                           MessageHandler(bancoFilter.filter_show_withdraws, show_withdraws)],
+                                           MessageHandler(bancoFilter.filter_show_withdraws, show_withdraws),
+                                           MessageHandler(bancoFilter.filter_recargar, add_recargar)],
                                           states={
                                               ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
                                               ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
@@ -194,7 +224,10 @@ add_balance_handler = ConversationHandler(entry_points=
                                               SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
                                               SHOW_TRANSFERS_LOGIC:[MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends),
                                                                     MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)],
-                                              RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)]
+                                              RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
+                                              ADD_RECARGA_MONTO: [MessageHandler(bancoFilter.filter_number, add_recarga_monto)],
+                                              ADD_RECARGA_EXECUTE: [MessageHandler(bancoFilter.filter_number, add_recarga_execute)]
+
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
