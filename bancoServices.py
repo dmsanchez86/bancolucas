@@ -198,7 +198,7 @@ def add_recarga_execute(bot, update):
     id_and_monto_recarga.append(update.message.text)
     helper = DBHelper()
     if helper.show_account(update.message.chat_id)[2] < int(id_and_monto_recarga[1]):
-        update.message.chat_id("Saldos insuficientes.")
+        update.message.reply_text("Saldos insuficientes.")
     else:
         helper.recharges(update.message.chat_id, id_and_monto_recarga[1],
                          helper.show_account(update.message.chat_id)[2],
