@@ -7,7 +7,7 @@ import bancoFilter
 
 ADD_BALANCE = 0
 ADD_BALANCE_NUMBER = 1
-GET_BALANCE = 0
+GET_BALANCE = 2
 
 def services(bot, update):
     reply_keyboard = [["Add fondos"], ["Ver Saldo"]]
