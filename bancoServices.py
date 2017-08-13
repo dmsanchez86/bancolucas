@@ -56,8 +56,8 @@ def get_info(bot, update):
     helper = DBHelper()
     account_info = helper.show_account(update.message.chat_id)
     update.message.reply_text("=> Información de la cuenta, " \
-                "\n\n* **Numero de Cuenta**: {} \n* Nombre del Cliente: {} " \
-                "\n* **Saldo en Cuenta**: ${}".format(account_info[0], account_info[1], account_info[2]))
+                "\n\n* Numero de Cuenta: {} \n* Nombre del Cliente: {} " \
+                "\n* Saldo en Cuenta: ${}".format(account_info[0], account_info[1], account_info[2]))
     return ConversationHandler.END
 
 
