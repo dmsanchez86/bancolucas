@@ -31,11 +31,11 @@ def transfer(bot, update):
 
 id_and_monto = []
 def transfer_monto(bot, update):
-    if update.message.reply_text == update.message.chat_id:
-        update.message.reply_text("No puede transferir dinero de su cuenta a su cuenta.")
+    if update.message.text == update.message.chat_id:
+        update.message.reply_text("No puede transferir dinero a su cuenta.")
         return ConversationHandler.END
     else:
-        update.message.reply_text("Digita el monto a transferir:")
+        update.message.reply_text("Digite el monto a transferir:")
         global id_and_monto
         id_and_monto = [update.message.text]
         return TRANSFERIR_EXECUTE
