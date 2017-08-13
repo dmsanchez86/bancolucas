@@ -20,9 +20,7 @@ def services(bot, update):
 
     reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
-
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
-
     if response == "Ver Saldo":
         return GET_BALANCE
     elif response == "Retirar":
@@ -94,7 +92,7 @@ def withdraw_logic(bot, update):
 
 
 add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_add_balance, add_balance), MessageHandler(bancoFilter.filter_get_balance, get_balance)
-    , MessageHandler(bancoFilter.filter_withdraw, withdraw), MessageHandler(bancoFilter.filter_account, get_info)],
+    , MessageHandler(bancoFilter.filter_withdraw, withdraw), MessageHandler(bancoFilter.filter_account, get_info), MessageHandler(bancoFilter.filter_transfer, transfer)],
                                           states={ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
                                                   ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
                                                   GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)],
