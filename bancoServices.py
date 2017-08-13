@@ -223,8 +223,7 @@ add_balance_handler = ConversationHandler(entry_points=
                                            MessageHandler(bancoFilter.filter_transfer, transfer),
                                            MessageHandler(bancoFilter.filter_show_transfers, show_transfers),
                                            MessageHandler(bancoFilter.filter_show_withdraws, show_withdraws),
-                                           MessageHandler(bancoFilter.filter_recargar, add_recargar),
-                                           MessageHandler(bancoFilter.filter_show_recharges, show_recharges)],
+                                           MessageHandler(bancoFilter.filter_recargar, add_recargar)],
                                           states={
                                               ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
                                               ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
