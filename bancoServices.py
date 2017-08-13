@@ -209,6 +209,7 @@ def add_recarga_execute(bot, update):
                                   "por el valor de ${} y su saldo actual es ${}".format(id_and_monto_recarga[0], id_and_monto_recarga[1],
                                                                                        helper.show_account(update.message.chat_id)[2]))
 
+
 def show_recharges(bot, update):
     helper = DBHelper()
     message = ""
@@ -243,7 +244,8 @@ add_balance_handler = ConversationHandler(entry_points=
                                                                     MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)],
                                               RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
                                               ADD_RECARGA_MONTO: [MessageHandler(bancoFilter.filter_number, add_recarga_monto)],
-                                              ADD_RECARGA_EXECUTE: [MessageHandler(bancoFilter.filter_number, add_recarga_execute)]
+                                              ADD_RECARGA_EXECUTE: [MessageHandler(bancoFilter.filter_number, add_recarga_execute)],
+                                              SHOW_RECHARGES: [MessageHandler(bancoFilter.filter_show_recharges, show_recharges)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
