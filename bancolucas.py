@@ -50,13 +50,13 @@ def sure_desactivate_account(bot, update):
 def desactivate_account(bot, update):
     helper = DBHelper()
     helper.desactivate_account(update.message.chat_id)
-    bot.send_message(chat_id=update.message.chat_id, text="## Cuenta desactivada. '/activar' para volver a usar su cuenta.", parse_mode=telegram.ParseMode.MARKDOWN)
+    bot.send_message(chat_id=update.message.chat_id, text="**Cuenta desactivada.** '/activar' para activar nuevamente su cuenta.", parse_mode=telegram.ParseMode.MARKDOWN)
     return ConversationHandler.END
 
 def active_account(bot, update):
     helper = DBHelper()
     helper.activate_account(update.message.chat_id)
-    bot.send_message(chat_id=update.message.chat_id, text="## Cuenta activada.", parse_mode=telegram.ParseMode.MARKDOWN)
+    bot.send_message(chat_id=update.message.chat_id, text="**Cuenta activada.**", parse_mode=telegram.ParseMode.MARKDOWN)
     return ConversationHandler.END
 
 
