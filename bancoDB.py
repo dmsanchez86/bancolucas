@@ -116,6 +116,18 @@ class DBHelper():
         finally:
             connection.close()
 
+    def withdraw_new(self, num_account, last_balance, current_balance, total_withdraw, date, state):
+        connection = self.connect()
+        try:
+            query = "INSERT INTO withdraw (num_account, " \
+                    "last_account_balance, current_account_balance, total_withdraw, date, state) " \
+                    "VALUES (%s, %s, %s, %s, %s, %s);"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account, last_balance, current_balance, total_withdraw, datetime.date.today(), state,))
+                connection.commit()
+        finally:
+            connection.close()
+
     # get balance account
     def get_balance(self, num_account):
         connection = self.connect()
