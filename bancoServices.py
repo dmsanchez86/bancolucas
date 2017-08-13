@@ -32,7 +32,7 @@ def transfer(bot, update):
 
 
 def transfer_monto(bot, update):
-    update.message.reply_text("Digita el monto a transferir:{}".format(s))
+    update.message.reply_text("Digita el monto a transferir:{}".format(update.message.text))
     return TRANSFERIR_EXECUTE
 
 
