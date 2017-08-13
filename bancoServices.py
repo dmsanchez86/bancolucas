@@ -212,11 +212,12 @@ def add_recarga_execute(bot, update):
 
 def show_recharges(bot, update):
     helper = DBHelper()
-    message = ""
-    for recharge_item in helper.get_recharges(update.message.chat_id):
-        message += recharge_item
+    mensaje = ""
+    for withdraw_item in helper.get_recharges(update.message.chat_id):
+        mensaje += "Fecha: {} saldo ${}, retiro: ${} - nuevo saldo: ${}.\n".format(withdraw_item[5], withdraw_item[2],
+                                                                                   withdraw_item[3], withdraw_item[4])
 
-    update.message.reply_text(message)
+    update.message.reply_text(mensaje)
 
 
 add_balance_handler = ConversationHandler(entry_points=
