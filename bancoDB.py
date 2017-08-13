@@ -70,7 +70,6 @@ class DBHelper():
             connection.close()
 
     # show account of user
-
     def show_account(self, num_account):
         connection = self.connect()
         try:
@@ -146,6 +145,7 @@ class DBHelper():
         finally:
             connection.close()
 
+    # insert new recharge
     def recharges(self, num_account_sender, num_account_receive, last_balance, current_balance, total_recharge, state):
         connection = self.connect()
         try:
@@ -163,6 +163,42 @@ class DBHelper():
         connection = self.connect()
         try:
             query = "SELECT * from recharges WHERE num_account = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account,))
+                return cursor.fetchall()
+        finally:
+            connection.close()
+
+    
+    # insert new referred
+    def referred(self, num_account_sender, num_account_receive, last_balance, current_balance, total_recharge, state):
+        connection = self.connect()
+        try:
+            query = "INSERT INTO referred (num_account, num_account_referred, " \
+                    "date, state) " \
+                    "VALUES (%s, %s, %s, %s);"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account_sender, num_account_receive, last_balance, current_balance, total_recharge, datetime.date.today(), state,))
+                connection.commit()
+        finally:
+            connection.close()
+
+    # get referred by account
+    def get_referred(self, num_account):
+        connection = self.connect()
+        try:
+            query = "SELECT * from referred WHERE num_account = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account,))
+                return cursor.fetchall()
+        finally:
+            connection.close()
+
+    # get referred number by account
+    def get_referred_number(self, num_account):
+        connection = self.connect()
+        try:
+            query = "SELECT COUNT(*) from referred WHERE num_account = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 return cursor.fetchall()
