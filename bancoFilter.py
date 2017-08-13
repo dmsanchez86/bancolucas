@@ -118,4 +118,4 @@ class FiltersRecargar(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == "Recargar"
 
-filter_recargar = FiltersShowWithDraws()
+filter_recargar = FiltersRecargar()
