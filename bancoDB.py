@@ -162,7 +162,7 @@ class DBHelper():
     def get_recharges(self, num_account):
         connection = self.connect()
         try:
-            query = "SELECT * from recharges WHERE num_account = %s"
+            query = "SELECT * from recharges WHERE num_account_sender = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 return cursor.fetchall()
