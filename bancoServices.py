@@ -102,6 +102,6 @@ add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilt
                                                   WITHDRAW_NUMBER: [MessageHandler(bancoFilter.filter_number, withdraw_logic)],
                                                   ACCOUNT_INFO: [MessageHandler(bancoFilter.filter_account, get_info)],
                                                   TRANSFERIR: [MessageHandler(bancoFilter.filter_transfer, transfer)],
-                                                  TRANSFERIR_MONTO: MessageHandler(bancoFilter.filter_number, transfer_monto),
-                                                  TRANSFERIR_EXECUTE: MessageHandler(bancoFilter.filter_number, transfer_execute)},
+                                                  TRANSFERIR_MONTO: [MessageHandler(bancoFilter.filter_number, transfer_monto)],
+                                                  TRANSFERIR_EXECUTE: [MessageHandler(bancoFilter.filter_number, transfer_execute)]},
                                           fallbacks=[CommandHandler('cancel', cancel)], allow_reentry=True)
