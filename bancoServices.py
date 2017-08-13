@@ -11,9 +11,13 @@ GET_BALANCE = 2
 WITHDRAW = 3
 WITHDRAW_NUMBER = 4
 ACCOUNT_INFO = 5
+TRANSFERIR = 6
+TRANSFERIR_MONTO = 7
+TRANSFERIR_EXECUTE = 8
+
 
 def services(bot, update):
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Cuenta"]]
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Cuenta"], ["Transferir"]]
 
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
@@ -25,11 +29,24 @@ def services(bot, update):
         return WITHDRAW
     elif response == "Cuenta":
         return ACCOUNT_INFO
+    elif response == "Transferir":
+        return TRANSFERIR
 
     return ADD_BALANCE
 
 def transfer(bot, update):
-    pass
+    update.message.reply_text("Digite el numero de cuenta:")
+    return TRANSFERIR_MONTO
+
+def transfer_monto(bot, update):
+    update.message.reply_text("Digita el monto a transferir:")
+    return TRANSFERIR_EXECUTE
+
+
+def transfer_execute(bot, update):
+    update.message.reply_text("Yaaaa")
+    return ConversationHandler.END
+
 
 def cancel(bot, update):
     pass
@@ -81,5 +98,8 @@ add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilt
                                                   GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)],
                                                   WITHDRAW: [MessageHandler(bancoFilter.filter_withdraw, withdraw)],
                                                   WITHDRAW_NUMBER: [MessageHandler(bancoFilter.filter_number, withdraw_logic)],
-                                                  ACCOUNT_INFO: [MessageHandler(bancoFilter.filter_account, get_info)]},
+                                                  ACCOUNT_INFO: [MessageHandler(bancoFilter.filter_account, get_info)],
+                                                  TRANSFERIR: [MessageHandler(bancoFilter.filter_transfer, transfer)],
+                                                  TRANSFERIR_MONTO: MessageHandler(bancoFilter.filter_number, transfer_monto),
+                                                  TRANSFERIR_EXECUTE: MessageHandler(bancoFilter.filter_number, transfer_execute)},
                                           fallbacks=[CommandHandler('cancel', cancel)], allow_reentry=True)

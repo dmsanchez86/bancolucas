@@ -62,3 +62,9 @@ class FilterAccount(telegram.ext.BaseFilter):
         return message.text == "Cuenta"
 
 filter_account = FilterAccount()
+
+class FilterTransfer(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Transferir"
+
+filter_transfer = FilterTransfer()
