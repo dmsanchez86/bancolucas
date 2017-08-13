@@ -154,6 +154,7 @@ class DBHelper():
             query = "SELECT * FROM transfers WHERE num_account_receive = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
+                return cursor.fetchall()
         finally:
             connection.close()
 

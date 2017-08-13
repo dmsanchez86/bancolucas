@@ -74,3 +74,23 @@ class FilterReturn(telegram.ext.BaseFilter):
         return message.text == "Atras"
 
 filter_return = FilterReturn()
+
+class FilterShowTransfers(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Mis transferencias"
+
+filter_show_transfers = FilterShowTransfers()
+
+class FiltersTransfersEntries(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Recibidas"
+
+
+filter_show_transfers_entries = FiltersTransfersEntries()
+
+class FiltersTransfersSends(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Enviadas"
+
+
+filter_show_transfers_sends = FiltersTransfersSends()
