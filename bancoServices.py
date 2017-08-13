@@ -68,7 +68,7 @@ def get_info(bot, update):
 
 
 def withdraw(bot, update):
-    update.message.reply_text("Digita el total a retirar")
+    update.message.reply_text("Digita el total a retirar:")
     return WITHDRAW_NUMBER
 
 def withdraw_logic(bot, update):
@@ -82,15 +82,22 @@ def withdraw_logic(bot, update):
     return ConversationHandler.END
 
 
-add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_add_balance, add_balance), MessageHandler(bancoFilter.filter_get_balance, get_balance)
-    , MessageHandler(bancoFilter.filter_withdraw, withdraw), MessageHandler(bancoFilter.filter_account, get_info), MessageHandler(bancoFilter.filter_transfer, transfer)],
-                                          states={ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
-                                                  ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
-                                                  GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)],
-                                                  WITHDRAW: [MessageHandler(bancoFilter.filter_withdraw, withdraw)],
-                                                  WITHDRAW_NUMBER: [MessageHandler(bancoFilter.filter_number, withdraw_logic)],
-                                                  ACCOUNT_INFO: [MessageHandler(bancoFilter.filter_account, get_info)],
-                                                  TRANSFERIR: [MessageHandler(bancoFilter.filter_transfer, transfer)],
-                                                  TRANSFERIR_MONTO: [MessageHandler(bancoFilter.filter_number, transfer_monto)],
-                                                  TRANSFERIR_EXECUTE: [MessageHandler(bancoFilter.filter_number, transfer_execute)]},
-                                          fallbacks=[CommandHandler('cancel', cancel)], allow_reentry=True)
+add_balance_handler = ConversationHandler(entry_points=
+                                          [MessageHandler(bancoFilter.filter_add_balance, add_balance),
+                                           MessageHandler(bancoFilter.filter_get_balance, get_balance),
+                                           MessageHandler(bancoFilter.filter_withdraw, withdraw),
+                                           MessageHandler(bancoFilter.filter_account, get_info),
+                                           MessageHandler(bancoFilter.filter_transfer, transfer)],
+                                          states={
+                                              ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
+                                              ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
+                                              GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)],
+                                              WITHDRAW: [MessageHandler(bancoFilter.filter_withdraw, withdraw)],
+                                              WITHDRAW_NUMBER: [MessageHandler(bancoFilter.filter_number, withdraw_logic)],
+                                              ACCOUNT_INFO: [MessageHandler(bancoFilter.filter_account, get_info)],
+                                              TRANSFERIR: [MessageHandler(bancoFilter.filter_transfer, transfer)],
+                                              TRANSFERIR_MONTO: [MessageHandler(bancoFilter.filter_number, transfer_monto)],
+                                              TRANSFERIR_EXECUTE: [MessageHandler(bancoFilter.filter_number, transfer_execute)]
+                                          },
+                                          fallbacks=[CommandHandler('cancel', cancel)],
+                                          allow_reentry=True)
