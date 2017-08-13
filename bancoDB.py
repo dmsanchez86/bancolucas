@@ -135,7 +135,7 @@ class DBHelper():
     def get_withdraws(self, num_account):
         connection = self.connect()
         try:
-            query = "SELECT * from withdraw WHERE num_account = %s order by date DESC"
+            query = "SELECT * from withdraw WHERE num_account = %s order by date ASC"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 return cursor.fetchall()
