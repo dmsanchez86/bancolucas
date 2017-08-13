@@ -164,7 +164,8 @@ def withdraw_logic(bot, update):
 
 
 def show_withdraws(bot, update):
-    update.message.reply_text("hi")
+    helper = DBHelper()
+    update.message.reply_text("{}".format(helper.get_withdraws(update.message.chat_id)))
 
 
 add_balance_handler = ConversationHandler(entry_points=
@@ -188,8 +189,8 @@ add_balance_handler = ConversationHandler(entry_points=
                                               RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
                                               SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
                                               SHOW_TRANSFERS_LOGIC:[MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends),
-                                                                    MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)],
-                                              SHOW_WITHDRAWS: [MessageHandler(bancoFilter.filter_show_withdraws, show_withdraws)]
+                                                                    MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)]
+                                              #SHOW_WITHDRAWS: [MessageHandler(bancoFilter.filter_show_withdraws, show_withdraws)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
