@@ -74,7 +74,7 @@ def transfer_execute(bot, update):
 
 
 def show_transfers(bot, update):
-    reply_keyboard = [["Enviadas"], ["Recibidas"], ["Menu Principal"]]
+    reply_keyboard = [["Enviadas", "Recibidas", "Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("Ver mis transferencias: ", reply_markup=response)
     if response == "Enviadas":
