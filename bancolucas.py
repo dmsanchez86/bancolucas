@@ -63,7 +63,7 @@ def active_account(bot, update):
 def options(bot, update):
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id) and helper.show_account(update.message.chat_id)[3]:
-        reply_keyboard = [["Servicios"], ["Cuenta"],["Desactivar cuenta"]]
+        reply_keyboard = [["Servicios"], ["Info cuenta"],["Desactivar cuenta"]]
         update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
         return OPTIONS
     elif helper.account_exists(update.message.chat_id):

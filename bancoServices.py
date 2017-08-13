@@ -17,8 +17,8 @@ TRANSFERIR_EXECUTE = 8
 
 
 def services(bot, update):
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Cuenta"], ["Transferir"]]
 
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
@@ -58,7 +58,7 @@ def add_balance(bot, update):
 def get_balance(bot, update):
     helper = DBHelper()
     balance = helper.get_balance(update.message.chat_id)
-    update.message.reply_text("Su saldo es {}".format(balance[0]))
+    update.message.reply_text("Su saldo es ${}".format(balance[0]))
     return ConversationHandler.END
 
 
@@ -72,7 +72,9 @@ def add_balance_logic(bot, update):
 def get_info(bot, update):
     helper = DBHelper()
     account_info = helper.show_account(update.message.chat_id)
-    update.message.reply_text("El número de cuenta es {}".format(account_info[0]))
+    update.message.reply_text("=> Información de la cuenta, " \
+                "\n\n* Numero de Cuenta: {} \n* Nombre del Cliente: {} " \
+                "\n* Saldo en Cuenta: ${}".format(account_info[0], account_info[1], account_info[2]))
     return ConversationHandler.END
 
 
