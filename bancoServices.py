@@ -148,7 +148,7 @@ add_balance_handler = ConversationHandler(entry_points=
                                           allow_reentry=True)
 
 
-add_show_transfers = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
+add_show_transfers_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
                                          states={
                                             SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
                                             TRANSFERS_SENDS: [MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends)],

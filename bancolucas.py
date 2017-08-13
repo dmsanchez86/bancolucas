@@ -111,6 +111,7 @@ def main():
 
     dispatcher.add_handler(delete_handler)
     dispatcher.add_handler(bancoServices.add_balance_handler)
+    dispatcher.add_handler(bancoServices.add_show_transfers_handler)
     active_handler = CommandHandler('activar', active_account)
     dispatcher.add_handler(active_handler)
     show_handler = CommandHandler('vercuenta', show_account)
