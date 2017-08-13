@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2179139-271b-496a-a681-6096276cf951" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoDB.py" afterPath="$PROJECT_DIR$/bancoDB.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoFilter.py" afterPath="$PROJECT_DIR$/bancoFilter.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoServices.py" afterPath="$PROJECT_DIR$/bancoServices.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +38,8 @@
       <file leaf-file-name="bancoServices.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bancoServices.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="171" column="38" lean-forward="true" selection-start-line="171" selection-start-column="38" selection-end-line="171" selection-end-column="38" />
+            <state relative-caret-position="319">
+              <caret line="169" column="89" lean-forward="false" selection-start-line="169" selection-start-column="89" selection-end-line="169" selection-end-column="89" />
               <folding>
                 <element signature="e#24#100#0" expanded="true" />
               </folding>
@@ -478,8 +476,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bancoServices.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="171" column="38" lean-forward="true" selection-start-line="171" selection-start-column="38" selection-end-line="171" selection-end-column="38" />
+        <state relative-caret-position="319">
+          <caret line="169" column="89" lean-forward="false" selection-start-line="169" selection-start-column="89" selection-end-line="169" selection-end-column="89" />
           <folding>
             <element signature="e#24#100#0" expanded="true" />
           </folding>

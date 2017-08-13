@@ -167,7 +167,8 @@ def show_withdraws(bot, update):
     helper = DBHelper()
     mensaje = ""
     for withdraw_item in helper.get_withdraws(update.message.chat_id):
-        mensaje += "El día {} usted tenia ${}, retiro ${} y su saldo en cuenta fue ${}".format(withdraw_item[5], withdraw_item[2], withdraw_item[3], withdraw_item[4])
+        mensaje += "El día {} usted tenia ${}, retiro ${} y su saldo en cuenta fue ${}.\n".format(withdraw_item[5], withdraw_item[2],
+                                                                                               withdraw_item[3], withdraw_item[4])
 
     update.message.reply_text(mensaje)
 
