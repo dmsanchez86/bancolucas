@@ -41,7 +41,8 @@ def transfer_execute(bot, update):
     id_and_monto.append(update.message.text)
     helper = DBHelper()
     helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), True)
-    update.message.reply_text(helper.get_transfers_sends(update.message.chat_id))
+    transfers = helper.get_transfers_sends(update.message.chat_id)
+    update.message.reply_text("Su transferrencia {} fue exitosa.".format(helper.get_transfers_sends(update.message.chat_id)[len(transfers) - 1]))
     return ConversationHandler.END
 
 
