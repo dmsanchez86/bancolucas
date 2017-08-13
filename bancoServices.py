@@ -15,10 +15,10 @@ ACCOUNT_INFO = 5
 TRANSFERIR = 6
 TRANSFERIR_MONTO = 7
 TRANSFERIR_EXECUTE = 8
-RETURN = 9
+RETURN = 12
 SHOW_TRANSFERS = 10
 SHOW_TRANSFERS_LOGIC = 11
-SHOW_WITHDRAWS = 12
+SHOW_WITHDRAWS = 9
 
 
 
@@ -192,10 +192,10 @@ add_balance_handler = ConversationHandler(entry_points=
                                               TRANSFERIR: [MessageHandler(bancoFilter.filter_transfer, transfer)],
                                               TRANSFERIR_MONTO: [MessageHandler(bancoFilter.filter_number, transfer_monto)],
                                               TRANSFERIR_EXECUTE: [MessageHandler(bancoFilter.filter_number, transfer_execute)],
-                                              RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
                                               SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
                                               SHOW_TRANSFERS_LOGIC:[MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends),
-                                                                    MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)]
+                                                                    MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)],
+                                              RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
