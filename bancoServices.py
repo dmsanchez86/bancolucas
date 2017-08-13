@@ -31,7 +31,7 @@ def transfer(bot, update):
 
 id_and_monto = []
 def transfer_monto(bot, update):
-    if update.message.text == update.message.chat_id:
+    if update.message.text == "{}".format(update.message.chat_id):
         update.message.reply_text("No puede transferir dinero a su cuenta.")
         return ConversationHandler.END
     else:
