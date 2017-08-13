@@ -92,7 +92,8 @@ def main():
                       MessageHandler(bancoFilter.filter_desactivate_account, desactivate_account),
                       MessageHandler(bancoFilter.filter_activate_account, active_account)]
         },
-        fallbacks=[CommandHandler('cancel', cancel)]
+        fallbacks=[CommandHandler('cancel', cancel)],
+        allow_reentry=True
     )
 
     dispatcher.add_handler(options_handler)

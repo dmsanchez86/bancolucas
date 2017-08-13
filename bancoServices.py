@@ -61,7 +61,7 @@ def withdraw_logic(bot, update):
         update.message.reply_text("Fondos insuficientes")
     else:
         helper.withdraw(withdrawal, update.message.chat_id)
-    update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
+    update.message.reply_text("Su nuevo saldo es ${}".format(helper.show_account(update.message.chat_id)[2]))
     return ConversationHandler.END
 
 
