@@ -135,7 +135,7 @@ class DBHelper():
             query = "SELECT * from withdraw WHERE num_account = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
-                return cursor.fetchone()
+                return cursor.fetchall()
         finally:
             connection.close()
 

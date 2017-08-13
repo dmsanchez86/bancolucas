@@ -54,7 +54,7 @@ filter_add_balance = FilterAddBalance()
 
 class FilterGetBalance(telegram.ext.BaseFilter):
     def filter(self, message):
-        return message.text == "Ver Saldo"
+        return message.text == "Ver saldo"
 
 filter_get_balance = FilterGetBalance()
 

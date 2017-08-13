@@ -23,11 +23,11 @@ SHOW_WITHDRAWS = 12
 
 
 def services(bot, update):
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"],
+    reply_keyboard = [["Agregar Saldo"], ["Ver saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"],
                       ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
-    if response == "Ver Saldo":
+    if response == "Ver saldo":
         return GET_BALANCE
     elif response == "Retirar":
         return WITHDRAW
@@ -165,7 +165,11 @@ def withdraw_logic(bot, update):
 
 def show_withdraws(bot, update):
     helper = DBHelper()
-    update.message.reply_text("{}".format(helper.get_withdraws(update.message.chat_id)))
+    mensaje = ""
+    for withdraw_item in helper.get_withdraws(update.message.chat_id):
+        mensaje += "El día {} usted tenia ${}, retiro ${} y su saldo en cuenta fue ${}".format(withdraw_item[5], withdraw_item[2], withdraw_item[3], withdraw_item[4])
+
+    update.message.reply_text(mensaje)
 
 
 add_balance_handler = ConversationHandler(entry_points=
