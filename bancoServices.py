@@ -41,15 +41,19 @@ def get_balance(bot, update):
     update.message.reply_text("Su saldo es {}".format(balance[0]))
     return ConversationHandler.END
 
-def withdraw(bot, update):
-    update.message.reply_text("Digita el total a retirar")
-    return WITHDRAW_NUMBER
 
 def add_balance_logic(bot, update):
     helper = DBHelper()
     sum = helper.show_account(update.message.chat_id)[2] + int(update.message.text)
     helper.add_balance(sum, update.message.chat_id)
     update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
+    return ConversationHandler.END
+
+
+def withdraw(bot, update):
+    update.message.reply_text("Digita el total a retirar")
+    return WITHDRAW_NUMBER
+
 
 def withdraw_logic(bot, update):
     helper = DBHelper()
@@ -59,10 +63,11 @@ def withdraw_logic(bot, update):
     else:
         helper.withdraw(withdrawal, update.message.chat_id)
     update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
+    return ConversationHandler.END
 
 
 add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_add_balance, add_balance), MessageHandler(bancoFilter.filter_get_balance, get_balance)
-    , MessageHandler(bancoFilter.filter_withdraw, withdraw_logic)],
+    , MessageHandler(bancoFilter.filter_withdraw, withdraw)],
                                           states={ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
                                                   ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
                                                   GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)],
