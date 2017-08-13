@@ -244,8 +244,7 @@ add_balance_handler = ConversationHandler(entry_points=
                                                                     MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)],
                                               RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
                                               ADD_RECARGA_MONTO: [MessageHandler(bancoFilter.filter_number, add_recarga_monto)],
-                                              ADD_RECARGA_EXECUTE: [MessageHandler(bancoFilter.filter_number, add_recarga_execute)],
-                                              SHOW_RECHARGES: [MessageHandler(bancoFilter.filter_show_recharges, show_recharges)]
+                                              ADD_RECARGA_EXECUTE: [MessageHandler(bancoFilter.filter_number, add_recarga_execute)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
