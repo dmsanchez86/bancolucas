@@ -114,7 +114,7 @@ class DBHelper():
             query = "SELECT account_balance from accounts WHERE num_account = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
-                connection.commit()
+                return cursor.fetchone()[2]
         finally:
             connection.close()
 
