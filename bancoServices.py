@@ -17,8 +17,8 @@ TRANSFERIR_MONTO = 7
 TRANSFERIR_EXECUTE = 8
 RETURN = 9
 SHOW_TRANSFERS = 10
-TRANSFERS_SENDS = 11
-TRANSFERS_ENTRIES = 12
+SHOW_TRANSFERS_LOGIC = 11
+
 
 
 def services(bot, update):
@@ -89,8 +89,7 @@ def show_transfers(bot, update):
     reply_keyboard = [["Enviadas"], ["Recibidas"], ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("Ver mis transferencias: ", reply_markup=response)
-    update.message.reply_text(response)
-
+    return SHOW_TRANSFERS_LOGIC
 
 def show_transfers_sends(bot, update):
     update.message.reply_text("Enviadas")
@@ -168,8 +167,8 @@ add_balance_handler = ConversationHandler(entry_points=
                                               TRANSFERIR_EXECUTE: [MessageHandler(bancoFilter.filter_number, transfer_execute)],
                                               RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
                                               SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
-                                              TRANSFERS_SENDS:[MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends)],
-                                              TRANSFERS_ENTRIES: [MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)]
+                                              SHOW_TRANSFERS_LOGIC:[MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends),
+                                                                    MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
