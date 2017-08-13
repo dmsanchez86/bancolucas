@@ -32,7 +32,9 @@ def add_balance(bot, update):
     return ADD_BALANCE_NUMBER
 
 def get_balance(bot, update):
-    update.message.reply_text("Su saldo es")
+    helper = DBHelper()
+    balance = helper.get_balance(update.message.chat_id)
+    update.message.reply_text("Su saldo es {}".format(balance))
     return ConversationHandler.END
 
 def add_balance_logic(bot, update):
