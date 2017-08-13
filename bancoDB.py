@@ -37,9 +37,6 @@ class DBHelper():
                      "(id serial PRIMARY KEY, num_account_sender integer, num_account_receive integer, "
                      "last_account_balance integer, current_account_balance integer, "
                      "total_recharge integer, date DATE, state bool);")
-        cur.execute("CREATE TABLE IF NOT EXISTS referred "
-                     "(id serial PRIMARY KEY, num_account integer, num_account_referred integer, "
-                     "date DATE, state bool);")
         return conn
 
 
@@ -149,7 +146,7 @@ class DBHelper():
     def recharges(self, num_account_sender, num_account_receive, last_balance, current_balance, total_recharge, state):
         connection = self.connect()
         try:
-            query = "INSERT INTO recharge (num_account_sender, num_account_receive, " \
+            query = "INSERT INTO recharges (num_account_sender, num_account_receive, " \
                     "last_account_balance, current_account_balance, total_recharge, date, state) " \
                     "VALUES (%s, %s, %s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
@@ -162,48 +159,13 @@ class DBHelper():
     def get_recharges(self, num_account):
         connection = self.connect()
         try:
-            query = "SELECT * from recharges WHERE num_account = %s"
+            query = "SELECT * from recharges WHERE num_account_sender = %s"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account,))
                 return cursor.fetchall()
         finally:
             connection.close()
 
-
-    # insert new referred
-    def referred(self, num_account_sender, num_account_receive, last_balance, current_balance, total_recharge, state):
-        connection = self.connect()
-        try:
-            query = "INSERT INTO referred (num_account, num_account_referred, " \
-                    "date, state) " \
-                    "VALUES (%s, %s, %s, %s);"
-            with connection.cursor() as cursor:
-                cursor.execute(query, (num_account_sender, num_account_receive, last_balance, current_balance, total_recharge, datetime.date.today(), state,))
-                connection.commit()
-        finally:
-            connection.close()
-
-    # get referred by account
-    def get_referred(self, num_account):
-        connection = self.connect()
-        try:
-            query = "SELECT * from referred WHERE num_account = %s"
-            with connection.cursor() as cursor:
-                cursor.execute(query, (num_account,))
-                return cursor.fetchall()
-        finally:
-            connection.close()
-
-    # get referred number by account
-    def get_referred_number(self, num_account):
-        connection = self.connect()
-        try:
-            query = "SELECT COUNT(*) from referred WHERE num_account = %s"
-            with connection.cursor() as cursor:
-                cursor.execute(query, (num_account,))
-                return cursor.fetchall()
-        finally:
-            connection.close()
 
     # get balance account
     def get_balance(self, num_account):

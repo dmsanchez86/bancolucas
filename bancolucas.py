@@ -4,7 +4,7 @@ import os
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 import bancoFilter, bancoServices
-
+import telegram
 
 DELETE = 0
 OPTIONS = 0
