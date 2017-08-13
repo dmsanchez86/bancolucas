@@ -156,3 +156,4 @@ class DBHelper():
                 cursor.execute(query, (num_account,))
         finally:
             connection.close()
+

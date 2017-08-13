@@ -40,9 +40,15 @@ def transfer_monto(bot, update):
 def transfer_execute(bot, update):
     id_and_monto.append(update.message.text)
     helper = DBHelper()
-    helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), True)
-    transfers = helper.get_transfers_sends(update.message.chat_id)
-    update.message.reply_text("Su transferrencia {} fue exitosa.".format(helper.get_transfers_sends(update.message.chat_id)[len(transfers) - 1]))
+    now_money = helper.show_account(update.message.chat_id)[2]
+
+    if now_money < int(id_and_monto[1]):
+        update.message.reply_text("Saldos insuficientes.")
+    else:
+        helper.withdraw(now_money - int(id_and_monto[1]), update.message.chat_id)
+        helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), True)
+        transfers = helper.get_transfers_sends(update.message.chat_id)
+        update.message.reply_text("Su transferencia de ${} a la cuenta {} fue exitosa.".format(transfers[2], transfers[3]))
     return ConversationHandler.END
 
 
