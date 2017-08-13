@@ -37,6 +37,9 @@ class DBHelper():
                     "(id serial PRIMARY KEY, num_account_sender integer, num_account_receive integer "
                     "last_account_balance integer, current_account_balance integer, "
                     "total_recharge integer, date DATE, state bool);")
+        cur.execute("CREATE TABLE IF NOT EXISTS referred "
+                    "(id serial PRIMARY KEY, num_account integer, num_account_referred integer "
+                    "date DATE, state bool);")
         return conn
 
 
