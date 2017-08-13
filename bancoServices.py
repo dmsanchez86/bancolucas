@@ -22,6 +22,7 @@ RECARGAR = 13
 ADD_RECARGA_EXECUTE = 15
 ADD_RECARGA_MONTO = 14
 
+
 def services(bot, update):
     reply_keyboard = [["Agregar Saldo"], ["Ver saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"], ["Recargar"]
                       ["Menu Principal"]]
@@ -184,26 +185,27 @@ def add_recargar(bot, update):
 id_and_monto_recarga = []
 
 
-def add_recarga_monto(bot, update):
-    global id_and_monto_recarga
-    id_and_monto_recarga = [update.message.text]
-    update.message.reply_text("Digite el monto que va a recargar:")
-    return ADD_RECARGA_EXECUTE
-
-def add_recarga_execute(bot, update):
-    id_and_monto_recarga.append(update.message.text)
-    helper = DBHelper()
-    if helper.show_account(update.message.chat_id)[2] < int(id_and_monto_recarga[1]):
-        update.message.chat_id("Saldos insuficientes.")
-    else:
-        helper.recharges(update.message.chat_id, id_and_monto_recarga[1],
-                         helper.show_account(update.message.chat_id)[2],
-                         helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[1]),
-                         id_and_monto_recarga[0],True)
-        helper.withdraw(helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[0]), update.message.chat_id)
-        update.message.reply_text("Usted a recargado la cuenta numero {} "
-                                  "por el valor de ${} y su saldo actual es {}".format(id_and_monto_recarga[0], id_and_monto_recarga[1],
-                                                                                       helper.show_account(update.message.chat_id)[2]))
+# def add_recarga_monto(bot, update):
+#     global id_and_monto_recarga
+#     id_and_monto_recarga = [update.message.text]
+#     update.message.reply_text("Digite el monto que va a recargar:")
+#     return ADD_RECARGA_EXECUTE
+#
+#
+# def add_recarga_execute(bot, update):
+#     id_and_monto_recarga.append(update.message.text)
+#     helper = DBHelper()
+#     if helper.show_account(update.message.chat_id)[2] < int(id_and_monto_recarga[1]):
+#         update.message.chat_id("Saldos insuficientes.")
+#     else:
+#         helper.recharges(update.message.chat_id, id_and_monto_recarga[1],
+#                          helper.show_account(update.message.chat_id)[2],
+#                          helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[1]),
+#                          id_and_monto_recarga[0],True)
+#         helper.withdraw(helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[0]), update.message.chat_id)
+#         update.message.reply_text("Usted a recargado la cuenta numero {} "
+#                                   "por el valor de ${} y su saldo actual es {}".format(id_and_monto_recarga[0], id_and_monto_recarga[1],
+#                                                                                        helper.show_account(update.message.chat_id)[2]))
 
 
 add_balance_handler = ConversationHandler(entry_points=
