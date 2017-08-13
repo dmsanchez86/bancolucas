@@ -29,6 +29,10 @@ class DBHelper():
                     "(id serial PRIMARY KEY, num_account_sender integer, "
                     "num_account_receive integer, account_balance integer, "
                     "date DATE, state bool);")
+        cur.execute("CREATE TABLE IF NOT EXISTS withdraw "
+                    "(id serial PRIMARY KEY, num_account integer, "
+                    "last_account_balance integer, current_account_balance integer, "
+                    "total_withdraw integer, date DATE, state bool);")
         return conn
 
 
@@ -109,6 +113,29 @@ class DBHelper():
             with connection.cursor() as cursor:
                 cursor.execute(query, (amount, num_account,))
                 connection.commit()
+        finally:
+            connection.close()
+
+    def withdraw_new(self, num_account, last_balance, current_balance, total_withdraw, date, state):
+        connection = self.connect()
+        try:
+            query = "INSERT INTO withdraw (num_account, " \
+                    "last_account_balance, current_account_balance, total_withdraw, date, state) " \
+                    "VALUES (%s, %s, %s, %s, %s, %s);"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account, last_balance, current_balance, total_withdraw, datetime.date.today(), state,))
+                connection.commit()
+        finally:
+            connection.close()
+
+    # get withdraws by account
+    def get_withdraws(self, num_account):
+        connection = self.connect()
+        try:
+            query = "SELECT * from withdraw WHERE num_account = %s"
+            with connection.cursor() as cursor:
+                cursor.execute(query, (num_account,))
+                return cursor.fetchone()
         finally:
             connection.close()
 
