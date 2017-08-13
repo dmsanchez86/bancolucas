@@ -21,7 +21,7 @@ def create_account(bot, update):
         dates = "=> Su cuenta se creo con éxito, " \
             "los datos son:" \
             "\n\n* Numero de Cuenta: {} \n* Nombre del Cliente: {} " \
-            "\n* Saldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
+            "\n* Saldo en Cuenta: ${}".format(date_account[0], date_account[1], date_account[2])
         update.message.reply_text(dates)
         return OPTIONS
 
@@ -31,7 +31,7 @@ def show_account(bot, update):
     exists_acc = helper.account_exists(update.message.chat_id)
     if exists_acc:
         date_account = helper.show_account(update.message.chat_id)
-        dates = "Numero de Cuenta: {} \nNombre del Cliente: {} \nSaldo en Cuenta: {}".format(date_account[0], date_account[1], date_account[2])
+        dates = "Numero de Cuenta: {} \nNombre del Cliente: {} \nSaldo en Cuenta: ${}".format(date_account[0], date_account[1], date_account[2])
         if date_account[3] == False:
             update.message.reply_text("Cuenta desactivada '/activar' para activar.")
         else:
