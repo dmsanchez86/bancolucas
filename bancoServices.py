@@ -213,9 +213,9 @@ def add_recarga_execute(bot, update):
 def show_recharges(bot, update):
     helper = DBHelper()
     mensaje = ""
-    for withdraw_item in helper.get_recharges(update.message.chat_id):
-        mensaje += "Fecha: {} saldo ${}, retiro: ${} - nuevo saldo: ${}.\n".format(withdraw_item[5], withdraw_item[2],
-                                                                                   withdraw_item[3], withdraw_item[4])
+    for recharge_item in helper.get_recharges(update.message.chat_id):
+        mensaje += "Usted recargo a {}, el monto de ${} el dia .\n".format(recharge_item[2], recharge_item[5],
+                                                                                   recharge_item[6])
 
     update.message.reply_text(mensaje)
 
