@@ -92,11 +92,13 @@ def show_transfers(bot, update):
     return SHOW_TRANSFERS_LOGIC
 
 def show_transfers_sends(bot, update):
-    update.message.reply_text("Enviadas")
+    helper = DBHelper()
+    update.message.reply_text("{}".format(helper.get_transfers_sends(update.message.chat_id)))
 
 
 def show_transfers_entries(bot, update):
-    update.message.reply_text("Recibidas")
+    helper = DBHelper()
+    update.message.reply_text("{}".format(helper.get_transfers_receive(update.message.chat_id)))
 
 
 def cancel(bot, update):
