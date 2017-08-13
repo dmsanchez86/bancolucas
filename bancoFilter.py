@@ -106,3 +106,10 @@ class FiltersTransferSends(telegram.ext.BaseFilter):
         return message.text == "Enviadas"
 
 filter_show_transfers_sends = FiltersTransferSends()
+
+
+class FiltersShowWithDraws(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Mis retiros"
+
+filter_show_withdraws = FiltersShowWithDraws()

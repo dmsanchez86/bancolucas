@@ -18,11 +18,12 @@ TRANSFERIR_EXECUTE = 8
 RETURN = 9
 SHOW_TRANSFERS = 10
 SHOW_TRANSFERS_LOGIC = 11
+SHOW_WITHDRAWS = 12
 
 
 
 def services(bot, update):
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"], ["Mis transferencias"],
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"],
                       ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
@@ -36,6 +37,8 @@ def services(bot, update):
         return TRANSFERIR
     elif response == "Mis transferencias":
         return SHOW_TRANSFERS
+    elif response == "Mis retiros":
+        return SHOW_WITHDRAWS
     elif response == "Menu Principal":
         return RETURN
 
@@ -160,6 +163,10 @@ def withdraw_logic(bot, update):
     return ConversationHandler.END
 
 
+def show_withdraws(bot, update):
+    update.message.reply_text("hi")
+
+
 add_balance_handler = ConversationHandler(entry_points=
                                           [MessageHandler(bancoFilter.filter_add_balance, add_balance),
                                            MessageHandler(bancoFilter.filter_get_balance, get_balance),
@@ -180,7 +187,8 @@ add_balance_handler = ConversationHandler(entry_points=
                                               RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
                                               SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
                                               SHOW_TRANSFERS_LOGIC:[MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends),
-                                                                    MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)]
+                                                                    MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)],
+                                              SHOW_WITHDRAWS: [MessageHandler(bancoFilter.filter_show_withdraws, show_withdraws)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)

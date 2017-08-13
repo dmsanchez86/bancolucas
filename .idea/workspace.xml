@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2179139-271b-496a-a681-6096276cf951" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoDB.py" afterPath="$PROJECT_DIR$/bancoDB.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoFilter.py" afterPath="$PROJECT_DIR$/bancoFilter.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoServices.py" afterPath="$PROJECT_DIR$/bancoServices.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +29,8 @@
       <file leaf-file-name="bancoFilter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bancoFilter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="97" column="30" lean-forward="true" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
+            <state relative-caret-position="259">
+              <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -39,8 +39,8 @@
       <file leaf-file-name="bancoServices.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bancoServices.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="143" column="0" lean-forward="true" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+            <state relative-caret-position="-2021">
+              <caret line="26" column="41" lean-forward="true" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
               <folding>
                 <element signature="e#24#100#0" expanded="true" />
               </folding>
@@ -75,8 +75,8 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/bancolucas.py" />
-        <option value="$PROJECT_DIR$/bancoFilter.py" />
         <option value="$PROJECT_DIR$/bancoDB.py" />
+        <option value="$PROJECT_DIR$/bancoFilter.py" />
         <option value="$PROJECT_DIR$/bancoServices.py" />
       </list>
     </option>
@@ -457,14 +457,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bancoFilter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="97" column="30" lean-forward="true" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bancoDB.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="109">
@@ -475,10 +467,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bancoFilter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bancoServices.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="143" column="0" lean-forward="true" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
+        <state relative-caret-position="-2021">
+          <caret line="26" column="41" lean-forward="true" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
           <folding>
             <element signature="e#24#100#0" expanded="true" />
           </folding>
