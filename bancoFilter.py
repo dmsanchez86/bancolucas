@@ -50,3 +50,9 @@ class FilterGetBalance(telegram.ext.BaseFilter):
         return message.text == "Ver Saldo"
 
 filter_get_balance = FilterGetBalance()
+
+class FilterWithdraw(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Retirar"
+
+filter_withdraw = FilterWithdraw()

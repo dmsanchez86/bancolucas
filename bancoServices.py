@@ -8,9 +8,11 @@ import bancoFilter
 ADD_BALANCE = 0
 ADD_BALANCE_NUMBER = 1
 GET_BALANCE = 2
+WITHDRAW = 3
+WITHDRAW_NUMBER = 4
 
 def services(bot, update):
-    reply_keyboard = [["Add fondos"], ["Ver Saldo"]]
+    reply_keyboard = [["Add fondos"], ["Ver Saldo"], ["Retirar"]]
 
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
@@ -18,6 +20,8 @@ def services(bot, update):
 
     if response == "Ver Saldo":
         return GET_BALANCE
+    elif response == "Retirar":
+        return WITHDRAW
 
     return ADD_BALANCE
 
@@ -37,16 +41,31 @@ def get_balance(bot, update):
     update.message.reply_text("Su saldo es {}".format(balance[0]))
     return ConversationHandler.END
 
+def withdraw(bot, update):
+    update.message.reply_text("Digita el total a retirar")
+    return WITHDRAW_NUMBER
+
 def add_balance_logic(bot, update):
     helper = DBHelper()
     sum = helper.show_account(update.message.chat_id)[2] + int(update.message.text)
     helper.add_balance(sum, update.message.chat_id)
     update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
 
+def withdraw_logic(bot, update)
+    helper = DBHelper()
+    withdrawal = helper.show_account(update.message.chat_id)[2] - int(update.message.text)
+    if withdrawal < 0:
+        update.message.reply_text("Fondos insuficientes")
+    else
+        helper.withdraw(withdrawal, update.message.chat_id)
+    update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
+
 
 add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_add_balance, add_balance), MessageHandler(bancoFilter.filter_get_balance, get_balance)],
                                           states={ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
                                                   ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
-                                                  GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)]},
+                                                  GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)],
+                                                  WITHDRAW: [MessageHandler(bancoFilter.filter_withdraw, withdraw)],
+                                                  WITHDRAW_NUMBER: [MessageHandler(bancoFilter.filter_number, withdraw_logic)]},
                                           fallbacks=[CommandHandler('cancel', cancel)])
 
