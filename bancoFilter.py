@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import telegram.ext
 
+
 class FilterServices(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == 'Servicios'
 
 filter_service = FilterServices()
+
 
 class FilterNewAccount(telegram.ext.BaseFilter):
     def filter(self, message):
@@ -13,11 +15,13 @@ class FilterNewAccount(telegram.ext.BaseFilter):
 
 filter_new_account = FilterNewAccount()
 
+
 class FilterDesactivateAccount(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == 'Desactivar cuenta'
 
 filter_desactivate_account = FilterDesactivateAccount()
+
 
 class FilterActivateAccount(telegram.ext.BaseFilter):
     def filter(self, message):
@@ -32,11 +36,13 @@ class FilterTransfer(telegram.ext.BaseFilter):
 
 filter_transfer = FilterTransfer()
 
+
 class FilterNumber(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text.isdigit()
 
 filter_number = FilterNumber()
+
 
 class FilterAddBalance(telegram.ext.BaseFilter):
     def filter(self, message):
@@ -45,11 +51,13 @@ class FilterAddBalance(telegram.ext.BaseFilter):
 
 filter_add_balance = FilterAddBalance()
 
+
 class FilterGetBalance(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == "Ver Saldo"
 
 filter_get_balance = FilterGetBalance()
+
 
 class FilterWithdraw(telegram.ext.BaseFilter):
     def filter(self, message):
@@ -57,11 +65,13 @@ class FilterWithdraw(telegram.ext.BaseFilter):
 
 filter_withdraw = FilterWithdraw()
 
+
 class FilterAccount(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == "Info cuenta"
 
 filter_account = FilterAccount()
+
 
 class FilterTransfer(telegram.ext.BaseFilter):
     def filter(self, message):
@@ -69,11 +79,13 @@ class FilterTransfer(telegram.ext.BaseFilter):
 
 filter_transfer = FilterTransfer()
 
+
 class FilterReturn(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == "Menu Principal"
 
 filter_return = FilterReturn()
+
 
 class FilterShowTransfers(telegram.ext.BaseFilter):
     def filter(self, message):
@@ -81,11 +93,13 @@ class FilterShowTransfers(telegram.ext.BaseFilter):
 
 filter_show_transfers = FilterShowTransfers()
 
+
 class FiltersTransfersEntries(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == "Recibidas"
 
 filter_show_transfers_entries = FiltersTransfersEntries()
+
 
 class FiltersTransfersSends(telegram.ext.BaseFilter):
     def filter(self, message):

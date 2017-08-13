@@ -2,15 +2,16 @@
 from telegram.ext import CommandHandler, ConversationHandler, MessageHandler
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
-import bancoFilter, bancolucas
+import bancoFilter
+import bancolucas
 
 
 ADD_BALANCE, ADD_BALANCE_NUMBER, GET_BALANCE, WITHDRAW, WITHDRAW_NUMBER, ACCOUNT_INFO, TRANSFERIR, TRANSFERIR_MONTO, TRANSFERIR_EXECUTE, RETURN,  SHOW_TRANSFERS, TRANSFERS_SENDS, TRANSFERS_ENTRIES =  range(13)
 
 
 def services(bot, update):
-
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"], ["Mis transferencias"], ["Menu Principal"]]
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"], ["Mis transferencias"],
+                      ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
     if response == "Ver Saldo":
@@ -29,12 +30,14 @@ def services(bot, update):
     return ADD_BALANCE
 
 
-
 def transfer(bot, update):
     update.message.reply_text("Digite el numero de cuenta:")
     return TRANSFERIR_MONTO
 
+
 id_and_monto = []
+
+
 def transfer_monto(bot, update):
     if update.message.text == "{}".format(update.message.chat_id):
         update.message.reply_text("No puede transferir dinero a su cuenta.")
@@ -58,7 +61,8 @@ def transfer_execute(bot, update):
         helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), True)
         transfers = helper.get_transfers_sends(update.message.chat_id)
         last_transfer = transfers[len(transfers) - 1]
-        update.message.reply_text("Su transferencia de ${} a la cuenta No.{} fue exitosa.".format(last_transfer[3], last_transfer[2]))
+        update.message.reply_text("Su transferencia de ${} a la cuenta No.{} fue exitosa.".format(last_transfer[3],
+                                                                                                  last_transfer[2]))
     return ConversationHandler.END
 
 
@@ -75,15 +79,19 @@ def show_transfers(bot, update):
 def show_transfers_sends(bot, update):
     update.message.reply_text("Enviadas")
 
+
 def show_transfers_entries(bot, update):
     update.message.reply_text("Recibidas")
+
 
 def cancel(bot, update):
     pass
 
+
 def add_balance(bot, update):
     update.message.reply_text("Digita el total a añadir")
     return ADD_BALANCE_NUMBER
+
 
 def get_balance(bot, update):
     helper = DBHelper()
@@ -99,6 +107,7 @@ def add_balance_logic(bot, update):
     update.message.reply_text("Su saldo es ${}".format(helper.show_account(update.message.chat_id)[2]))
     return ConversationHandler.END
 
+
 def get_info(bot, update):
     helper = DBHelper()
     account_info = helper.show_account(update.message.chat_id)
@@ -111,6 +120,7 @@ def get_info(bot, update):
 def withdraw(bot, update):
     update.message.reply_text("Digita el total a retirar:")
     return WITHDRAW_NUMBER
+
 
 def withdraw_logic(bot, update):
     helper = DBHelper()
