@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2179139-271b-496a-a681-6096276cf951" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoFilter.py" afterPath="$PROJECT_DIR$/bancoFilter.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bancoServices.py" afterPath="$PROJECT_DIR$/bancoServices.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,8 +38,8 @@
       <file leaf-file-name="bancoServices.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bancoServices.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="89" column="54" lean-forward="true" selection-start-line="89" selection-start-column="54" selection-end-line="89" selection-end-column="54" />
+            <state relative-caret-position="165">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="e#24#100#0" expanded="true" />
               </folding>
@@ -477,8 +476,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bancoServices.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="89" column="54" lean-forward="true" selection-start-line="89" selection-start-column="54" selection-end-line="89" selection-end-column="54" />
+        <state relative-caret-position="165">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="e#24#100#0" expanded="true" />
           </folding>
