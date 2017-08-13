@@ -113,3 +113,9 @@ class FiltersShowWithDraws(telegram.ext.BaseFilter):
         return message.text == "Mis retiros"
 
 filter_show_withdraws = FiltersShowWithDraws()
+
+class FiltersRecargar(telegram.ext.BaseFilter):
+    def filter(self, message):
+        return message.text == "Recargar"
+
+filter_recargar = FiltersShowWithDraws()
