@@ -5,6 +5,7 @@ from telegram import ReplyKeyboardMarkup
 import bancoFilter, bancolucas
 
 
+
 ADD_BALANCE = 0
 ADD_BALANCE_NUMBER = 1
 GET_BALANCE = 2
@@ -14,15 +15,13 @@ ACCOUNT_INFO = 5
 TRANSFERIR = 6
 TRANSFERIR_MONTO = 7
 TRANSFERIR_EXECUTE = 8
-RETURN = 12
-SHOW_TRANSFERS = 10
-SHOW_TRANSFERS_LOGIC = 11
-SHOW_WITHDRAWS = 9
-RECARGAR = 13
-ADD_RECARGA_EXECUTE = 15
-ADD_RECARGA_MONTO = 14
-
-
+SHOW_TRANSFERS = 9
+SHOW_TRANSFERS_LOGIC = 10
+RETURN = 11
+ADD_RECARGA_MONTO = 12
+ADD_RECARGA_EXECUTE = 13
+SHOW_WITHDRAWS = 14
+RECARGAR = 15
 def services(bot, update):
     reply_keyboard = [["Agregar Saldo"], ["Ver saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"], ["Recargar"]
                       ["Menu Principal"]]
@@ -184,6 +183,11 @@ def add_recargar(bot, update):
 
 id_and_monto_recarga = []
 
+def add_recarga_monto(bot, update):
+    update.message.reply_text("Cuato va a recargar")
+
+def add_recarga_execute(bot, update):
+    update.message.reply_text("jejeje")
 
 # def add_recarga_monto(bot, update):
 #     global id_and_monto_recarga
@@ -230,9 +234,9 @@ add_balance_handler = ConversationHandler(entry_points=
                                               SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
                                               SHOW_TRANSFERS_LOGIC:[MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends),
                                                                     MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)],
-                                              RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)]
-                                              #ADD_RECARGA_MONTO: [MessageHandler(bancoFilter.filter_number, add_recarga_monto)],
-                                              #ADD_RECARGA_EXECUTE: [MessageHandler(bancoFilter.filter_number, add_recarga_execute)]
+                                              RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
+                                              ADD_RECARGA_MONTO: [MessageHandler(bancoFilter.filter_number, add_recarga_monto)],
+                                              ADD_RECARGA_EXECUTE: [MessageHandler(bancoFilter.filter_number, add_recarga_execute)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
