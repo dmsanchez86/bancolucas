@@ -71,7 +71,7 @@ filter_transfer = FilterTransfer()
 
 class FilterReturn(telegram.ext.BaseFilter):
     def filter(self, message):
-        return message.text == "Atras"
+        return message.text == "Menu Principal"
 
 filter_return = FilterReturn()
 
