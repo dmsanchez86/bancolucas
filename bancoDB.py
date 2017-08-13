@@ -35,7 +35,7 @@ class DBHelper():
                     "total_withdraw integer, date DATE, state bool);")
         cur.execute("CREATE TABLE IF NOT EXISTS recharges "
                     "(id serial PRIMARY KEY, num_account_sender integer, num_account_receive integer "
-                    "last_account_balance integer, cu rrent_account_balance integer, "
+                    "last_account_balance integer, current_account_balance integer, "
                     "total_recharge integer, date DATE, state bool);")
         return conn
 
@@ -155,7 +155,7 @@ class DBHelper():
         finally:
             connection.close()
 
-    # get withdraws by account
+    # get recharges by account
     def get_recharges(self, num_account):
         connection = self.connect()
         try:
