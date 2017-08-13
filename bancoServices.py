@@ -10,7 +10,7 @@ SHOW_TRANSFERS = 0
 
 def services(bot, update):
 
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"], ["Tansferencias enviadas"], ["Atras"]]
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"], ["Mis transferencias"], ["Atras"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
     if response == "Ver Saldo":

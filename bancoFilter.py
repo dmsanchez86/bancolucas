@@ -85,7 +85,6 @@ class FiltersTransfersEntries(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == "Recibidas"
 
-
 filter_show_transfers_entries = FiltersTransfersEntries()
 
 class FiltersTransfersSends(telegram.ext.BaseFilter):
