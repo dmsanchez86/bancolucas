@@ -12,11 +12,7 @@ WITHDRAW = 3
 WITHDRAW_NUMBER = 4
 
 def services(bot, update):
-<<<<<<< HEAD
-    reply_keyboard = [["Add fondos"], ["Ver Saldo"], ["Retirar"]]
-=======
-    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"]]
->>>>>>> 00982c16db228e814f95c29a3dc5d3693986cf96
+    reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"]]
 
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
@@ -55,17 +51,18 @@ def add_balance_logic(bot, update):
     helper.add_balance(sum, update.message.chat_id)
     update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
 
-def withdraw_logic(bot, update)
+def withdraw_logic(bot, update):
     helper = DBHelper()
     withdrawal = helper.show_account(update.message.chat_id)[2] - int(update.message.text)
     if withdrawal < 0:
         update.message.reply_text("Fondos insuficientes")
-    else
+    else:
         helper.withdraw(withdrawal, update.message.chat_id)
     update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
 
 
-add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_add_balance, add_balance), MessageHandler(bancoFilter.filter_get_balance, get_balance)],
+add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_add_balance, add_balance), MessageHandler(bancoFilter.filter_get_balance, get_balance)
+    , MessageHandler(bancoFilter.filter_withdraw, withdraw_logic)],
                                           states={ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
                                                   ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
                                                   GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)],

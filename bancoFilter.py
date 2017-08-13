@@ -3,7 +3,7 @@ import telegram.ext
 
 class FilterServices(telegram.ext.BaseFilter):
     def filter(self, message):
-        return message.text == 'Ver nuestros servicios'
+        return message.text == 'Servicios'
 
 filter_service = FilterServices()
 
