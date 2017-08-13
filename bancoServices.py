@@ -9,7 +9,7 @@ ADD_BALANCE, ADD_BALANCE_NUMBER, GET_BALANCE, WITHDRAW, WITHDRAW_NUMBER, ACCOUNT
 def services(bot, update):
 
     reply_keyboard = [["Agregar Saldo"], ["Ver Saldo"], ["Retirar"], ["Transferir"]]
-    response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
+    response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
     if response == "Ver Saldo":
         return GET_BALANCE

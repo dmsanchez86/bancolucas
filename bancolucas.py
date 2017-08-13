@@ -64,15 +64,15 @@ def options(bot, update):
     helper = DBHelper()
     if helper.account_exists(update.message.chat_id) and helper.show_account(update.message.chat_id)[3]:
         reply_keyboard = [["Servicios"], ["Info cuenta"],["Desactivar cuenta"]]
-        update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+        update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False))
         return OPTIONS
     elif helper.account_exists(update.message.chat_id):
         reply_keyboard = [["Activar cuenta"]]
-        update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+        update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False))
         return OPTIONS
     elif not helper.account_exists(update.message.chat_id):
         reply_keyboard = [["Crear cuenta"]]
-        update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+        update.message.reply_text("¿Que deseas hacer?", reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False))
         return OPTIONS
 
 
