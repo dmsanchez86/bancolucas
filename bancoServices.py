@@ -1,20 +1,10 @@
 # -*- coding: utf-8 -*-
-from telegram.ext import Updater, CommandHandler, ConversationHandler, RegexHandler, MessageHandler
-import os
+from telegram.ext import CommandHandler, ConversationHandler, MessageHandler
 from bancoDB import DBHelper
 from telegram import ReplyKeyboardMarkup
 import bancoFilter
 
-ADD_BALANCE = 0
-ADD_BALANCE_NUMBER = 1
-GET_BALANCE = 2
-WITHDRAW = 3
-WITHDRAW_NUMBER = 4
-ACCOUNT_INFO = 5
-TRANSFERIR = 6
-TRANSFERIR_MONTO = 7
-TRANSFERIR_EXECUTE = 8
-
+ADD_BALANCE, ADD_BALANCE_NUMBER, GET_BALANCE, WITHDRAW, WITHDRAW_NUMBER, ACCOUNT_INFO, TRANSFERIR, TRANSFERIR_MONTO, TRANSFERIR_EXECUTE = range(8)
 
 def services(bot, update):
 
@@ -34,7 +24,8 @@ def services(bot, update):
 
 def transfer(bot, update):
     update.message.reply_text("Digite el numero de cuenta:")
-    return TRANSFERIR_MONTO
+    id_account = update.message.text
+    return TRANSFERIR_MONTO, id_account
 
 def transfer_monto(bot, update):
     update.message.reply_text("Digita el monto a transferir:")
