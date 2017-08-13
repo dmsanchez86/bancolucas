@@ -116,7 +116,7 @@ class DBHelper():
         finally:
             connection.close()
 
-    def withdraw_new(self, num_account, last_balance, current_balance, total_withdraw, date, state):
+    def withdraw_new(self, num_account, last_balance, current_balance, total_withdraw, state):
         connection = self.connect()
         try:
             query = "INSERT INTO withdraw (num_account, " \
