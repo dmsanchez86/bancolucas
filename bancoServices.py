@@ -52,7 +52,7 @@ def add_balance_logic(bot, update):
     update.message.reply_text("Su saldo es ${}".format(helper.show_account(update.message.chat_id)[2]))
     return ConversationHandler.END
 
-def get_info(bot, update)
+def get_info(bot, update):
     helper = DBHelper()
     account_info = helper.show_account(update.message.chat_id)
     update.message.reply_text("El número de cuenta es {}".format(account_info[0]))
