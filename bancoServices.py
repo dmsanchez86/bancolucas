@@ -176,7 +176,7 @@ def show_withdraws(bot, update):
     mensaje = ""
     for withdraw_item in helper.get_withdraws(update.message.chat_id):
         mensaje += "Fecha: {} saldo ${}, retiro: ${} - nuevo saldo: ${}.\n".format(withdraw_item[5], withdraw_item[2],
-                                                                                               withdraw_item[3], withdraw_item[4])
+                                                                                               withdraw_item[4], withdraw_item[3])
 
     update.message.reply_text(mensaje)
 
