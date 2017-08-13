@@ -28,7 +28,7 @@ class DBHelper():
         cur.execute("CREATE TABLE IF NOT EXISTS transfers "
                     "(id serial PRIMARY KEY, num_account_sender integer, "
                     "num_account_receive integer, account_balance integer, "
-                    "date, state bool);")
+                    "date DATE, state bool);")
         return conn
 
 
