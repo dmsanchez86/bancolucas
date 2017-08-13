@@ -175,11 +175,15 @@ def show_withdraws(bot, update):
 
     update.message.reply_text(mensaje)
 
+
 def add_recargar(bot, update):
     update.message.reply_text("Digite el numero de cuenta que va a recargar:")
     return ADD_RECARGA_MONTO
 
+
 id_and_monto_recarga = []
+
+
 def add_recarga_monto(bot, update):
     global id_and_monto_recarga
     id_and_monto_recarga = [update.message.text]
@@ -194,9 +198,9 @@ def add_recarga_execute(bot, update):
     else:
         helper.recharges(update.message.chat_id, id_and_monto_recarga[1],
                          helper.show_account(update.message.chat_id)[2],
-                         helper.show_account(update.message.chat_id)[2] -  id_and_monto_recarga[1],
+                         helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[1]),
                          id_and_monto_recarga[0],True)
-        helper.withdraw(helper.show_account(update.message.chat_id)[2] -  id_and_monto_recarga[0], update.message.chat_id)
+        helper.withdraw(helper.show_account(update.message.chat_id)[2] -  int(id_and_monto_recarga[0]), update.message.chat_id)
         update.message.reply_text("Usted a recargado la cuenta numero {} "
                                   "por el valor de ${} y su saldo actual es {}".format(id_and_monto_recarga[0], id_and_monto_recarga[1],
                                                                                        helper.show_account(update.message.chat_id)[2]))
@@ -227,7 +231,6 @@ add_balance_handler = ConversationHandler(entry_points=
                                               RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
                                               ADD_RECARGA_MONTO: [MessageHandler(bancoFilter.filter_number, add_recarga_monto)],
                                               ADD_RECARGA_EXECUTE: [MessageHandler(bancoFilter.filter_number, add_recarga_execute)]
-
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],
                                           allow_reentry=True)
