@@ -6,7 +6,19 @@ import bancoFilter
 import bancolucas
 
 
-ADD_BALANCE, ADD_BALANCE_NUMBER, GET_BALANCE, WITHDRAW, WITHDRAW_NUMBER, ACCOUNT_INFO, TRANSFERIR, TRANSFERIR_MONTO, TRANSFERIR_EXECUTE, RETURN,  SHOW_TRANSFERS, TRANSFERS_SENDS, TRANSFERS_ENTRIES =  range(13)
+ADD_BALANCE = 0
+ADD_BALANCE_NUMBER = 1
+GET_BALANCE = 2
+WITHDRAW = 3
+WITHDRAW_NUMBER = 4
+ACCOUNT_INFO = 5
+TRANSFERIR = 6
+TRANSFERIR_MONTO = 7
+TRANSFERIR_EXECUTE = 8
+RETURN = 9
+SHOW_TRANSFERS = 10
+TRANSFERS_SENDS = 11
+TRANSFERS_ENTRIES = 12
 
 
 def services(bot, update):
@@ -56,6 +68,7 @@ def transfer_execute(bot, update):
     id_and_monto.append(update.message.text)
     helper = DBHelper()
     now_money = helper.show_account(update.message.chat_id)[2]
+    name_user = helper.show_account(update.message.chat_id)[1]
 
     if now_money < int(id_and_monto[1]):
         update.message.reply_text("Saldos insuficientes.")
@@ -68,7 +81,7 @@ def transfer_execute(bot, update):
         last_transfer = transfers[len(transfers) - 1]
         update.message.reply_text("Su transferencia de ${} a la cuenta No.{} fue exitosa.".format(last_transfer[3],
                                                                                                   last_transfer[2]))
-        bot.send_message(chat_id=int(id_and_monto[0]), text="Hiiii")
+        bot.send_message(chat_id=int(id_and_monto[0]), text="Usted ha recibido ${} del usuario {} con cuenta No.{}".format(int(id_and_monto[1]), name_user, update.message.chat_id))
     return ConversationHandler.END
 
 
@@ -76,10 +89,7 @@ def show_transfers(bot, update):
     reply_keyboard = [["Enviadas"], ["Recibidas"], ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("Ver mis transferencias: ", reply_markup=response)
-    if response == "Enviadas":
-        return TRANSFERS_SENDS
-    else:
-        return TRANSFERS_ENTRIES
+    return TRANSFERS_SENDS
 
 
 def show_transfers_sends(bot, update):
@@ -158,7 +168,7 @@ add_balance_handler = ConversationHandler(entry_points=
                                               TRANSFERIR_EXECUTE: [MessageHandler(bancoFilter.filter_number, transfer_execute)],
                                               RETURN: [MessageHandler(bancoFilter.filter_return, bancolucas.options)],
                                               SHOW_TRANSFERS: [MessageHandler(bancoFilter.filter_show_transfers, show_transfers)],
-                                              TRANSFERS_SENDS: [MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends)],
+                                              TRANSFERS_SENDS:[MessageHandler(bancoFilter.filter_show_transfers_sends, show_transfers_sends)],
                                               TRANSFERS_ENTRIES: [MessageHandler(bancoFilter.filter_show_transfers_entries, show_transfers_entries)]
                                           },
                                           fallbacks=[CommandHandler('cancel', cancel)],

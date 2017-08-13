@@ -101,9 +101,8 @@ class FiltersTransfersEntries(telegram.ext.BaseFilter):
 filter_show_transfers_entries = FiltersTransfersEntries()
 
 
-class FiltersTransfersSends(telegram.ext.BaseFilter):
+class FiltersTransferSends(telegram.ext.BaseFilter):
     def filter(self, message):
         return message.text == "Enviadas"
 
-
-filter_show_transfers_sends = FiltersTransfersSends()
+filter_show_transfers_sends = FiltersTransferSends()
