@@ -129,7 +129,7 @@ class DBHelper():
         try:
             query = "INSERT INTO transfers (num_account_sender, " \
                     "num_account_receive, account_balance, date, state) " \
-                    "VALUES (%s, %s, %s, %s, %s, %s);"
+                    "VALUES (%s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account_sender, num_account_receive, account_balance, date, state,))
                 connection.commit()
