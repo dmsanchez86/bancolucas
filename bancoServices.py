@@ -22,22 +22,23 @@ def services(bot, update):
 
     return ADD_BALANCE
 
-s = ""
+
 
 def transfer(bot, update):
     update.message.reply_text("Digite el numero de cuenta:")
-    global s
-    s = update.message.text
     return TRANSFERIR_MONTO
 
-
+ids = []
 def transfer_monto(bot, update):
-    update.message.reply_text("Digita el monto a transferir:{}".format(update.message.text))
+    update.message.reply_text("Digita el monto a transferir:")
+    global ids
+    ids = [update.message.text]
     return TRANSFERIR_EXECUTE
 
 
 def transfer_execute(bot, update):
-    update.message.reply_text("Yaaaa")
+    ids.append(update.message.text)
+    update.message.reply_text(ids)
     return ConversationHandler.END
 
 
