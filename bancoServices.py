@@ -23,7 +23,7 @@ ADD_RECARGA_EXECUTE = 13
 SHOW_WITHDRAWS = 14
 RECARGAR = 15
 def services(bot, update):
-    reply_keyboard = [["Agregar Saldo"], ["Ver saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"], ["Recargar"]
+    reply_keyboard = [["Agregar Saldo"], ["Ver saldo"], ["Retirar"], ["Mis retiros"], ["Transferir"], ["Mis transferencias"], ["Recargar"],
                       ["Menu Principal"]]
     response = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
     update.message.reply_text("¿Que quieres hacer?", reply_markup=response)
