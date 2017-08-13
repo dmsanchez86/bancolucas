@@ -48,7 +48,8 @@ def transfer_execute(bot, update):
         helper.withdraw(now_money - int(id_and_monto[1]), update.message.chat_id)
         helper.transfer_to_account(update.message.chat_id, int(id_and_monto[0]), int(id_and_monto[1]), True)
         transfers = helper.get_transfers_sends(update.message.chat_id)
-        update.message.reply_text("Su transferencia de ${} a la cuenta {} fue exitosa.".format(transfers[2], transfers[3]))
+        last_transfer = transfers[len(transfers) - 1]
+        update.message.reply_text("Su transferencia de ${} a la cuenta {} fue exitosa.".format(last_transfer[2], last_transfer[3]))
     return ConversationHandler.END
 
 
