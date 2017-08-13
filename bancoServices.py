@@ -72,5 +72,5 @@ add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilt
                                                   GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)],
                                                   WITHDRAW: [MessageHandler(bancoFilter.filter_withdraw, withdraw)],
                                                   WITHDRAW_NUMBER: [MessageHandler(bancoFilter.filter_number, withdraw_logic)]},
-                                          fallbacks=[CommandHandler('cancel', cancel)])
+                                          fallbacks=[CommandHandler('cancel', cancel)], allow_reentry=True)
 

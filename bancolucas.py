@@ -105,7 +105,8 @@ def main():
             DELETE: [RegexHandler('^(Si|No)$', desactivate_account)]
         },
 
-        fallbacks=[CommandHandler('cancel', cancel)]
+        fallbacks=[CommandHandler('cancel', cancel)],
+        allow_reentry=True
     )
 
     dispatcher.add_handler(delete_handler)
