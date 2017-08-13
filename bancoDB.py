@@ -102,7 +102,7 @@ class DBHelper():
         try:
             query = "UPDATE accounts SET account_balance = %s WHERE num_account = %s"
             with connection.cursor() as cursor:
-                cursor.execute(query, (num_account,))
+                cursor.execute(query, (amount, num_account,))
                 connection.commit()
         finally:
             connection.close()
