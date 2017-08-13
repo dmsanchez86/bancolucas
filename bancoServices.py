@@ -95,14 +95,18 @@ def show_transfers_sends(bot, update):
     helper = DBHelper()
     mensaje = ""
     for x in helper.get_transfers_sends(update.message.chat_id):
-        mensaje += "A {} el {} por el monto de ${}. \n".format(x[2], x[4], x[3])
+        mensaje += "A el No.{} el dia {} por el monto de ${}. \n".format(x[2], x[4], x[3])
 
     update.message.reply_text(mensaje)
 
 
 def show_transfers_entries(bot, update):
     helper = DBHelper()
-    update.message.reply_text("{}".format(helper.get_transfers_receive(update.message.chat_id)))
+    mensaje = ""
+    for x in helper.get_transfers_receive(update.message.chat_id):
+        mensaje += "De el No.{} el dia {} por el monto de ${}. \n".format(x[1], x[4], x[3])
+
+    update.message.reply_text(mensaje)
 
 
 def cancel(bot, update):
