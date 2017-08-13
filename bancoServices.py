@@ -28,7 +28,7 @@ def transfer(bot, update):
     return TRANSFERIR_MONTO, id_account
 
 def transfer_monto(bot, update):
-    update.message.reply_text("Digita el monto a transferir:")
+    update.message.reply_text("Digita el monto a transferir:{}".format(transfer(bot, update)[1]))
     return TRANSFERIR_EXECUTE
 
 

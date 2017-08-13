@@ -23,8 +23,12 @@ class DBHelper():
             port=port
         )
         cur = conn.cursor()
-        cur.execute("CREATE TABLE IF NOT EXISTS accounts (num_account integer, name_user text, account_balance integer, state bool);")
-        cur.execute("CREATE TABLE IF NOT EXISTS transfers (id serial PRIMARY KEY, num_account_sender integer, num_account_receive integer, account_balance integer, date date, state bool);")
+        cur.execute("CREATE TABLE IF NOT EXISTS accounts (num_account integer, "
+                    "name_user text, account_balance integer, state bool);")
+        cur.execute("CREATE TABLE IF NOT EXISTS transfers "
+                    "(id serial PRIMARY KEY, num_account_sender integer, "
+                    "num_account_receive integer, account_balance integer, "
+                    "date date, state bool);")
         return conn
 
 
@@ -123,7 +127,9 @@ class DBHelper():
     def transfer_to_account(self, id, num_account_sender, num_account_receive, account_balance, date, state):
         connection = self.connect()
         try:
-            query = "INSERT INTO transfers (id, num_account_sender, num_account_receive, account_balance, date, state) VALUES (%s, %s, %s, %s, %s, %s);"
+            query = "INSERT INTO transfers (id, num_account_sender, " \
+                    "num_account_receive, account_balance, date, state) " \
+                    "VALUES (%s, %s, %s, %s, %s, %s);"
             with connection.cursor() as cursor:
                 cursor.execute(query, (num_account_sender, num_account_receive, account_balance, date, state,))
                 connection.commit()
