@@ -42,7 +42,7 @@ def add_balance_logic(bot, update):
     update.message.reply_text("Su saldo es {}".format(helper.show_account(update.message.chat_id)[2]))
 
 
-add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_add_balance, add_balance)],
+add_balance_handler = ConversationHandler(entry_points=[MessageHandler(bancoFilter.filter_add_balance, add_balance), MessageHandler(bancoFilter.filter_get_balance, get_balance)],
                                           states={ADD_BALANCE: [MessageHandler(bancoFilter.filter_number, add_balance)],
                                                   ADD_BALANCE_NUMBER: [MessageHandler(bancoFilter.filter_number, add_balance_logic)],
                                                   GET_BALANCE: [MessageHandler(bancoFilter.filter_get_balance, get_balance)]},
