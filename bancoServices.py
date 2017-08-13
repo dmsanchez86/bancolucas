@@ -26,6 +26,7 @@ s = ""
 
 def transfer(bot, update):
     update.message.reply_text("Digite el numero de cuenta:")
+    global s
     s = update.message.text
     return TRANSFERIR_MONTO
 
