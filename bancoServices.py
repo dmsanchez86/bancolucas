@@ -39,9 +39,12 @@ id_and_monto = []
 
 
 def transfer_monto(bot, update):
+    helper = DBHelper()
     if update.message.text == "{}".format(update.message.chat_id):
         update.message.reply_text("No puede transferir dinero a su cuenta.")
         return ConversationHandler.END
+    elif not helper.account_exists(update.message.text):
+        update.message.reply_text("El numero de cuenta no existe")
     else:
         update.message.reply_text("Digite el monto a transferir:")
         global id_and_monto
