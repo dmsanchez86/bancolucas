@@ -53,7 +53,7 @@ def services(bot, update):
 
 
 def transfer(bot, update):
-    update.message.reply_text("Digite el numero de cuenta:")
+    update.message.reply_text("Digite el N° de la cuenta:")
     return TRANSFERIR_MONTO
 
 
@@ -63,12 +63,12 @@ id_and_monto = []
 def transfer_monto(bot, update):
     helper = DBHelper()
     if update.message.text == "{}".format(update.message.chat_id):
-        update.message.reply_text("No puede transferir dinero a su cuenta.")
+        update.message.reply_text("No se pudo transferir dinero a su cuenta.")
         return ConversationHandler.END
     elif not helper.account_exists(update.message.text):
-        update.message.reply_text("El numero de cuenta no existe")
+        update.message.reply_text("El N° de la cuenta no existe")
     else:
-        update.message.reply_text("Digite el monto a transferir:")
+        update.message.reply_text("Digite el monto a transferir $ ")
         global id_and_monto
         id_and_monto = [update.message.text]
         return TRANSFERIR_EXECUTE
@@ -81,7 +81,7 @@ def transfer_execute(bot, update):
     name_user = helper.show_account(update.message.chat_id)[1]
 
     if now_money < int(id_and_monto[1]):
-        update.message.reply_text("Saldos insuficientes.")
+        update.message.reply_text("$$$ Saldos insuficientes.")
     else:
         now_money_recibe = helper.show_account(int(id_and_monto[0]))[2]
         helper.withdraw(now_money - int(id_and_monto[1]), update.message.chat_id)
@@ -104,18 +104,18 @@ def show_transfers(bot, update):
 
 def show_transfers_sends(bot, update):
     helper = DBHelper()
-    mensaje = ""
+    mensaje = "=> Transferencias Enviadas\n\n"
     for transfer_item in helper.get_transfers_sends(update.message.chat_id):
-        mensaje += "A el No.{} el dia {} por el monto de ${}. \n".format(transfer_item[2], transfer_item[4], transfer_item[3])
+        mensaje += "Cuenta N° {} - fecha {} - monto ${}. \n".format(transfer_item[2], transfer_item[4], transfer_item[3])
 
     update.message.reply_text(mensaje)
 
 
 def show_transfers_entries(bot, update):
     helper = DBHelper()
-    mensaje = ""
+    mensaje = "=> Transferencias Recibidas\n\n"
     for transfer_item in helper.get_transfers_receive(update.message.chat_id):
-        mensaje += "De el No.{} el dia {} por el monto de ${}. \n".format(transfer_item[1], transfer_item[4], transfer_item[3])
+        mensaje += "Cuenta N° {} - fecha {} monto ${}. \n".format(transfer_item[1], transfer_item[4], transfer_item[3])
 
     update.message.reply_text(mensaje)
 
@@ -125,7 +125,7 @@ def cancel(bot, update):
 
 
 def add_balance(bot, update):
-    update.message.reply_text("Digita el total a añadir")
+    update.message.reply_text("Digita el total a añadir $")
     return ADD_BALANCE_NUMBER
 
 
@@ -148,13 +148,13 @@ def get_info(bot, update):
     helper = DBHelper()
     account_info = helper.show_account(update.message.chat_id)
     update.message.reply_text("=> Información de la cuenta, " \
-                "\n\n* Numero de Cuenta: {} \n* Nombre del Cliente: {} " \
-                "\n* Saldo en Cuenta: ${}".format(account_info[0], account_info[1], account_info[2]))
+                "\n\n* N° Cuenta: {} \n* Cliente: {} " \
+                "\n* Saldo: ${}".format(account_info[0], account_info[1], account_info[2]))
     return ConversationHandler.END
 
 
 def withdraw(bot, update):
-    update.message.reply_text("Digita el total a retirar:")
+    update.message.reply_text("Digita el monto a retirar $")
     return WITHDRAW_NUMBER
 
 
@@ -162,7 +162,7 @@ def withdraw_logic(bot, update):
     helper = DBHelper()
     withdrawal = helper.show_account(update.message.chat_id)[2] - int(update.message.text)
     if withdrawal < 0:
-        update.message.reply_text("Fondos insuficientes")
+        update.message.reply_text("¡Fondos insuficientes!")
     else:
         helper.withdraw_new(update.message.chat_id, helper.show_account(update.message.chat_id)[2], withdrawal,
                             int(update.message.text), True)
@@ -175,14 +175,14 @@ def show_withdraws(bot, update):
     helper = DBHelper()
     mensaje = ""
     for withdraw_item in helper.get_withdraws(update.message.chat_id):
-        mensaje += "El día {} usted tenia ${}, retiro ${} y su saldo en cuenta fue ${}.\n".format(withdraw_item[5], withdraw_item[2],
+        mensaje += "Fecha: {} saldo ${}, retiro: ${} - nuevo saldo: ${}.\n".format(withdraw_item[5], withdraw_item[2],
                                                                                                withdraw_item[3], withdraw_item[4])
 
     update.message.reply_text(mensaje)
 
 
 def add_recargar(bot, update):
-    update.message.reply_text("Digite el numero de cuenta que va a recargar:")
+    update.message.reply_text("Digite el N° de la cuenta que va a recargar:")
     return ADD_RECARGA_MONTO
 
 
